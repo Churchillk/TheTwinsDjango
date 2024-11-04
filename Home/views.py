@@ -2,7 +2,7 @@ from typing import Any
 from django.db.models.query import QuerySet
 from django.shortcuts import render, redirect
 from .models import Drinks, Expenses, SoldDrinks, OrderedDrinks, Contact, Dashboard as Dashmodel
-from django.views.generic import DetailView, ListView, TemplateView
+from django.views.generic import DetailView, ListView, ContextMixin
 from django.contrib import messages
 from .forms import SoldDrinksForm, ExpenseForm, ContactForm
 from django.views import View as DjangoView
@@ -124,7 +124,7 @@ class ExpensesView(LoginRequiredMixin, ListView):
         context['dashboard'] = dashboard
         return context
 
-class AddExpenses(DjangoView):
+class AddExpenses(DjangoView, ContextMixin):
     def get(self, request):
         form = ExpenseForm()
         return render(request, 'Home/add_expense.html', {'form': form})
