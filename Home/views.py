@@ -11,7 +11,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 import pytz
 from datetime import datetime
 
-class HomeView(ListView):
+class HomeView(LoginRequiredMixin, ListView):
     model = OrderedDrinks
     context_object_name = 'drinks'
     template_name = 'Home/home.html'
