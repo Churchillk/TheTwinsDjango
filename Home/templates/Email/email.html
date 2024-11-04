@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Reminder</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .header {
+            background-color: #000;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+        .header img {
+            max-width: 100%;
+            height: auto;
+        }
+        .content {
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+        }
+        .content h1 {
+            color: #c00; /* Red color */
+        }
+        .footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #000;
+            color: #fff;
+            font-size: 12px;
+        }
+        .footer a {
+            color: #fff;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="https://th.bing.com/th/id/R.2f01f829e893e6c28f86c2384106385f?rik=BvaxJqgDze50EQ&riu=http%3a%2f%2fpastorjess.com%2fuploads%2f8%2f0%2f0%2f0%2f80007388%2fshutterstock-300283754_1_orig.jpg&ehk=5giW06fvkNlGxm17d4NjX3G4Se0HWuJOmOnwNEq%2fwrE%3d&risl=&pid=ImgRaw&r=0" alt="Header Image" />
+        </div>
+        <div class="content">
+            <h1>Out of Order Email</h1>
+            <p>Dear Admin,</p>
+            <p>Dear admin, Seemingly we are running out of'<strong>{{ drink }}</strong>'! We are below the threshold of 6.. Order date  <strong>{{ date }}</strong>. Your participation is important to us. Please mark your calendar for the event's end on <strong>{{ end_date }}</strong>. If you have any questions, feel free to reach out.</p>
+            <p>Thank you.</p>
+        </div>
+        <div class="footer">
+            <p>&copy; {{ current_year }} The Twins. All rights reserved.</p>
+            <p><a href="">powerd by BCL</a></p>
+        </div>
+    </div>
+</body>
+</html>

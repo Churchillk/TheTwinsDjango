@@ -1,0 +1,96 @@
+{% extends "Home/base.html" %}
+
+{% load static %}
+
+{% block title %}Contacts{% endblock title %}
+
+{% block body %}
+
+<div class="row">
+  <div class="col-md-6 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Message Contact</h4>
+        <form method="POST">
+          {% csrf_token %}
+          <div class="form-group">
+            <label for="quantity">User</label>
+            {{ form.name }}
+          </div>
+          <div class="form-group">
+            <label for="quantity">Enter Message</label>
+            {{ form.message }}
+          </div>
+          <button type="submit" class="btn btn-primary me-2">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Daily Sales</h4>
+          <div class="position-relative">
+            <div class="daoughnutchart-wrapper">
+              <canvas id="transaction-history" class="transaction-chart"></canvas>
+            </div>
+            <div class="custom-value">$1200 <span>Total</span>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>
+
+<div class="row ">
+  <div class="col-12 grid-margin">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Contact List</h4>
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>
+                  <div class="form-check form-check-muted m-0">
+                    <label class="form-check-label">
+                      <input type="checkbox" class="form-check-input" id="check-all">
+                    </label>
+                  </div>
+                </th>
+                <th> User </th>
+                <th> UserName </th>
+                <th> Contact </th>
+                <th> Role </th>
+                <th> Location </th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for contact in contacts %}
+                  <tr>
+                      <td>
+                        <div class="form-check form-check-muted m-0">
+                          <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input">
+                          </label>
+                        </div>
+                      </td>
+                      <td>
+                        <img src="{{ contact.picture.url }}" alt="image" />
+                      </td>
+                      <td> {{ contact.name }} </td>
+                      <td> {{ contact.contact }} </td>
+                      <td> {{ contact.role }} </td>
+                      <td> {{ contact.location }} </td>
+                  </tr>
+                {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% endblock body %}
