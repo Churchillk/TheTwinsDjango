@@ -1,0 +1,33 @@
+{% extends "Auth/base.html" %}
+
+{% load static %}
+
+{% block title %}Register Today{% endblock title %}
+
+{% block body %}
+
+<h3 class="card-title text-start mb-3">Login</h3>
+<form method="POST">
+    {% csrf_token %}
+    <div class="form-group">
+    <label>Username</label>
+    {{ form.username }}
+    </div>
+    <div class="form-group">
+    <label>Password</label>
+    {{ form.password }}
+    </div>
+    <div class="text-center d-grid gap-2">
+    <button type="submit" class="btn btn-primary btn-block enter-btn">Login</button>
+    </div>
+    <div class="form-group d-flex align-items-center justify-content-between">
+        <div class="form-check">
+            <label class="form-check-label">
+            <input type="checkbox" class="form-check-input"> Remember me </label>
+        </div>
+        <a href="#" class="forgot-pass">Forgot password</a>
+        </div>
+    <p class="sign-up text-center">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Do not have an Account?<a href="{% url "register" %}"> Sign Up </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+</form>
+
+{% endblock body %}
