@@ -32,10 +32,30 @@ class DrinksView(LoginRequiredMixin, ListView):
     context_object_name = 'drinks'
     template_name = 'Home/available_drinks.html'
     
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        
+        # Retrieve the Dashboard instance, or create one if it doesn't exist
+        dashboard, created = Dashmodel.objects.get_or_create(pk=1)
+
+        # Add the Dashboard instance to the context
+        context['dashboard'] = dashboard
+        return context
+    
 class DailySalesView(LoginRequiredMixin, ListView):
     model = Drinks
     context_object_name = 'drinks'
     template_name = 'Home/available_drinks.html'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        
+        # Retrieve the Dashboard instance, or create one if it doesn't exist
+        dashboard, created = Dashmodel.objects.get_or_create(pk=1)
+
+        # Add the Dashboard instance to the context
+        context['dashboard'] = dashboard
+        return context
 
 class SoldDrinksView(LoginRequiredMixin, ListView):
     model = SoldDrinks
@@ -49,17 +69,45 @@ class SoldDrinksView(LoginRequiredMixin, ListView):
         utc_now = datetime.now(pytz.utc)# Getting the current time in UTC
         kenya_time = utc_now.astimezone(kenya_timezone)
         context['kenya_time'] = kenya_time
+        
+        # Retrieve the Dashboard instance, or create one if it doesn't exist
+        dashboard, created = Dashmodel.objects.get_or_create(pk=1)
+
+        # Add the Dashboard instance to the context
+        context['dashboard'] = dashboard
         return context
 
 class OrderedDrinksView(LoginRequiredMixin, ListView):
     model = OrderedDrinks
     context_object_name = 'drinks'
     template_name = 'Home/orderd.html'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        
+        # Retrieve the Dashboard instance, or create one if it doesn't exist
+        dashboard, created = Dashmodel.objects.get_or_create(pk=1)
+
+        # Add the Dashboard instance to the context
+        context['dashboard'] = dashboard
+        return context
+
 
 class AddedDrinksView(LoginRequiredMixin, ListView):
     model = Drinks
     context_object_name = 'drinks'
     template_name = 'Home/added.html'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        
+        # Retrieve the Dashboard instance, or create one if it doesn't exist
+        dashboard, created = Dashmodel.objects.get_or_create(pk=1)
+
+        # Add the Dashboard instance to the context
+        context['dashboard'] = dashboard
+        return context
+
 
 class ExpensesView(LoginRequiredMixin, ListView):
     model = Expenses
@@ -91,6 +139,17 @@ class AddExpenses(DjangoView):
             return redirect('expenses')
         
         return render(request, 'Home/add_expense.html', {'form': form})
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        
+        # Retrieve the Dashboard instance, or create one if it doesn't exist
+        dashboard, created = Dashmodel.objects.get_or_create(pk=1)
+
+        # Add the Dashboard instance to the context
+        context['dashboard'] = dashboard
+        return context
+
 
 class ContactsView(LoginRequiredMixin, ListView):
     model = Contact
@@ -111,11 +170,33 @@ class ContactsView(LoginRequiredMixin, ListView):
             return redirect('contacts')
 
         return render(request, self.template_name, {"form": form, "contacts": contacts})
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        
+        # Retrieve the Dashboard instance, or create one if it doesn't exist
+        dashboard, created = Dashmodel.objects.get_or_create(pk=1)
+
+        # Add the Dashboard instance to the context
+        context['dashboard'] = dashboard
+        return context
+
 
 class SellDrink(DetailView):
     model = Drinks
     context_object_name = "drink"
     template_name = 'Home/selling_form.html'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        
+        # Retrieve the Dashboard instance, or create one if it doesn't exist
+        dashboard, created = Dashmodel.objects.get_or_create(pk=1)
+
+        # Add the Dashboard instance to the context
+        context['dashboard'] = dashboard
+        return context
+
 
     def get(self, request, *args, **kwargs):
         drink = self.get_object()  # Get the current drink object
