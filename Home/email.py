@@ -20,7 +20,7 @@ def send_email(drink, date, email):
         email_message.content_subtype = 'html'
         email_message.send()
     except Exception as e:
-        print(f"{Fore.RED} Email sending failed: {e} {Style.RESET_ALL}")
+        pass
 
 if __name__ == "__main__":
     send_email(
