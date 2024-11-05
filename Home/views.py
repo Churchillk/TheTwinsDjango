@@ -125,10 +125,13 @@ class ExpensesView(LoginRequiredMixin, ListView):
         context['dashboard'] = dashboard
         return context
 
-class AddExpenses(DjangoView, ContextMixin):
+class AddExpenses(DjangoView):
     def get(self, request):
         form = ExpenseForm()
-        return render(request, 'Home/add_expense.html', {'form': form})
+        # Get or create the Dashboard instance
+        dashboard, created = Dashmodel.objects.get_or_create(pk=1)
+        # Pass dashboard to the context
+        return render(request, 'Home/add_expense.html', {'form': form, 'dashboard': dashboard})
 
     def post(self, request):
         form = ExpenseForm(request.POST)
@@ -136,73 +139,56 @@ class AddExpenses(DjangoView, ContextMixin):
             expense = form.save(commit=False)
             expense.employee = request.user
             expense.save()
-            messages.success(request, 'Expense added successfuly')
+            messages.success(request, 'Expense added successfully')
             return redirect('expenses')
         
-        return render(request, 'Home/add_expense.html', {'form': form})
-    
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        
-        # Retrieve the Dashboard instance, or create one if it doesn't exist
+        # Get or create the Dashboard instance
         dashboard, created = Dashmodel.objects.get_or_create(pk=1)
-
-        # Add the Dashboard instance to the context
-        context['dashboard'] = dashboard
-        return context
+        # Pass dashboard to the context
+        return render(request, 'Home/add_expense.html', {'form': form, 'dashboard': dashboard})
 
 
 class ContactsView(LoginRequiredMixin, ListView):
     model = Contact
     context_object_name = 'contacts'
     template_name = 'Home/contacts.html'
-    
-    def get(self, request, *args, **kwargs):
-        contacts = Contact.objects.all()
-        form = ContactForm()
-        return render(request, self.template_name, {'form': form, 'contacts': contacts})
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # Retrieve the Dashboard instance, or create one if it doesn't exist
+        dashboard, created = Dashmodel.objects.get_or_create(pk=1)
+        # Add the Dashboard instance to the context
+        context['dashboard'] = dashboard
+        # Add the ContactForm to the context
+        context['form'] = ContactForm()
+        return context
 
     def post(self, request, *args, **kwargs):
         form = ContactForm(request.POST)
-        contacts = Contact.objects.all()
         if form.is_valid():
             form.save()
-            
             return redirect('contacts')
 
-        return render(request, self.template_name, {"form": form, "contacts": contacts})
-    
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        
-        # Retrieve the Dashboard instance, or create one if it doesn't exist
-        dashboard, created = Dashmodel.objects.get_or_create(pk=1)
-
-        # Add the Dashboard instance to the context
-        context['dashboard'] = dashboard
-        return context
+        # If the form is not valid, render the template with the full context
+        context = self.get_context_data()
+        context['form'] = form  # Pass the invalid form to the context
+        return self.render_to_response(context)
 
 
 class SellDrink(DetailView):
     model = Drinks
     context_object_name = "drink"
     template_name = 'Home/selling_form.html'
-    
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        
         # Retrieve the Dashboard instance, or create one if it doesn't exist
         dashboard, created = Dashmodel.objects.get_or_create(pk=1)
-
         # Add the Dashboard instance to the context
         context['dashboard'] = dashboard
+        # Add the SoldDrinksForm to the context
+        context['form'] = SoldDrinksForm()
         return context
-
-
-    def get(self, request, *args, **kwargs):
-        drink = self.get_object()  # Get the current drink object
-        form = SoldDrinksForm()
-        return render(request, self.template_name, {"form": form, "drink": drink})
 
     def post(self, request, *args, **kwargs):
         drink = self.get_object()  # Get the current drink object
@@ -211,12 +197,13 @@ class SellDrink(DetailView):
             sold_drink = form.save(commit=False)
             sold_drink.drink = drink
             sold_drink.save()
-
-            drink.save()
-
+            drink.save()  # Save the drink if necessary
             return redirect('sold_drinks')
 
-        return render(request, self.template_name, {"form": form, "drink": drink})
+        # If the form is not valid, get the full context and pass the form
+        context = self.get_context_data()
+        context['form'] = form  # Update the context with the invalid form
+        return self.render_to_response(context)
     
 class Debts(ListView):
     model = SoldDrinks

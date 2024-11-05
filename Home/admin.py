@@ -4,6 +4,9 @@ from . import models as HomeModels
 admin.site.site_header = 'Twins Dev'
 admin.site.index_title = 'DevAdmin'
 
+@admin.register(HomeModels.Dashboard)
+class AdminDash(admin.ModelAdmin):
+    list_display = [field.name for field in HomeModels.Dashboard._meta.get_fields()]
 
 @admin.register(HomeModels.Drinks)
 class AdminDrinks(admin.ModelAdmin):

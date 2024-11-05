@@ -1,4 +1,3 @@
-# signals.py
 from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
 from .models import SoldDrinks, Expenses, Dashboard
@@ -20,17 +19,14 @@ def update_dashboard(expense_amount=0, is_expense_deleted=False):
     debt_sales = SoldDrinks.objects.filter(payment_mode='Debt').aggregate(total_debt=Sum('total'))
     dashboard.debt = debt_sales['total_debt'] or 0
 
+    # Adjust cash at hand only when an expense is added
+    if not is_expense_deleted:
+        # If an expense was added, subtract the expense amount
+        dashboard.cash_at_hand -= expense_amount
+
     # Calculate total expenses: Sum of all expenses
     total_expenses = Expenses.objects.aggregate(total_expenses=Sum('price'))
     dashboard.expenses = total_expenses['total_expenses'] or 0
-
-    # Adjust cash at hand based on expenses
-    if is_expense_deleted:
-        # If an expense was deleted, add back the expense amount
-        dashboard.cash_at_hand += expense_amount
-    else:
-        # If an expense was added, subtract the expense amount
-        dashboard.cash_at_hand -= expense_amount
 
     # Calculate total sales: Sum of all sales (Cash + Till)
     dashboard.total_sales = dashboard.cash_at_hand + dashboard.cash_at_bank
@@ -45,8 +41,10 @@ def update_dashboard_on_sold_drinks(sender, instance, **kwargs):
 
 @receiver(post_save, sender=Expenses)
 def update_dashboard_on_expenses(sender, instance, **kwargs):
+    # Pass the price of the expense to subtract from cash at hand
     update_dashboard(expense_amount=instance.price, is_expense_deleted=False)
 
 @receiver(post_delete, sender=Expenses)
 def update_dashboard_on_expenses_delete(sender, instance, **kwargs):
+    # No need to adjust cash at hand when an expense is deleted
     update_dashboard(expense_amount=instance.price, is_expense_deleted=True)
