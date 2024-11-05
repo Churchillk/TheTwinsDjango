@@ -38,9 +38,9 @@ class Drinks(models.Model):
         self.closing_stock = self.opening_stock + self.added_stock - self.sold_stock
 
         # Check if the closing stock is below the threshold of 6
-        print(f"Closing stock for {self.name}: {self.closing_stock}")
+        # print(f"Closing stock for {self.name}: {self.closing_stock}")
         if self.closing_stock < 6:
-            print(f"{Back.CYAN} {self.name} is running low. Stock left: {self.closing_stock} {Style.RESET_ALL}")
+            print(f"{Back.RED} {self.name} is running low. Stock left: {self.closing_stock} {Style.RESET_ALL}")
 
             # Check if an order already exists for this drink and is still pending
             from .models import OrderedDrinks
@@ -51,16 +51,23 @@ class Drinks(models.Model):
                 OrderedDrinks.objects.create(
                     drink=self,
                     product_cost=self.cost,
-                    payment_mode='Cash',  # Default payment mode, can be changed as needed
+                    payment_mode='Cash',
                     order_status='pending'
                 )
                 print(f"{Back.GREEN} order made successfuly {Back.RESET}")
-                send_email(
-                    drink=self.name,
-                    date=kenya_time,
-                    email='churchilkodhiambo@gmail.com'
-                )
-                print(f"{Back.RED} Email Sent successfuly {Back.RESET}")
+                # Retrieve all superuser accounts
+                superusers = User.objects.filter(is_superuser=True)
+                superuser_emails = [user.email for user in superusers]
+                if superuser_emails:
+                    for su_email in superuser_emails:
+                        send_email(
+                            drink=self.name,
+                            date=kenya_time,
+                            email=f'{su_email}'
+                        )
+                        print(f"{Back.GREEN} Email Sent successfuly to {su_email} {Back.RESET}")
+                else:
+                    print(f'{Back.RED} No email Found {Style.RESET_ALL}')
 
         super(Drinks, self).save(*args, **kwargs)
 

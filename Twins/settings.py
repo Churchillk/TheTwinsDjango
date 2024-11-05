@@ -134,9 +134,6 @@ LOGIN_REDIRECT_URL = 'home'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CSRF_TRUSTED_ORIGINS = [
-    "https://bd02-154-159-227-124.ngrok-free.app"
-]
 
 #timezone
 TIME_ZONE = 'Africa/Nairobi'

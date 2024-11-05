@@ -28,8 +28,8 @@ def update_dashboard(expense_amount=0, is_expense_deleted=False):
     total_expenses = Expenses.objects.aggregate(total_expenses=Sum('price'))
     dashboard.expenses = total_expenses['total_expenses'] or 0
 
-    # Calculate total sales: Sum of all sales (Cash + Till)
-    dashboard.total_sales = dashboard.cash_at_hand + dashboard.cash_at_bank
+    # Calculate total sales: Cash at hand + Cash at bank + Expenses
+    dashboard.total_sales = dashboard.cash_at_hand + dashboard.cash_at_bank + dashboard.expenses
 
     # Save the updated dashboard
     dashboard.save()
