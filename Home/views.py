@@ -10,7 +10,16 @@ from django.views import View as DjangoView
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 import pytz
+from django.views.generic import View
+
+# pdfgen
+from django.http import HttpResponse, FileResponse
+import weasyprint
+from django.template.loader import render_to_string
+
+from django.template.loader import get_template
 from datetime import datetime
+from django.contrib.auth.models import User
 
 class HomeView(LoginRequiredMixin, ListView):
     model = OrderedDrinks
@@ -223,3 +232,73 @@ class Debts(ListView):
         # Add the Dashboard instance to the context
         context['dashboard'] = dashboard
         return context 
+    
+class DailyReportView(View):
+    def get(self, request, *args, **kwargs):
+        # Get today's date
+        today = datetime.now().date()
+
+        # Fetch data for the report
+        dashboard = Dashmodel.objects.first()  # Assuming there is only one dashboard entry
+        sold_drinks = SoldDrinks.objects.filter(date__date=today)
+        expenses = Expenses.objects.filter(date__date=today)
+        drinks = Drinks.objects.all()
+
+        # Calculate totals
+        total_sales = sum(drink.total for drink in sold_drinks)
+        total_expenses = sum(expense.price for expense in expenses)
+        stocks_added = sum(drink.added_stock for drink in drinks)
+        stocks_sold = sum(drink.sold_stock for drink in drinks)
+
+        # Prepare the data for the preview
+        context = {
+            'dashboard': dashboard,
+            'total_sales': total_sales,
+            'total_expenses': total_expenses,
+            'stocks_added': stocks_added,
+            'stocks_sold': stocks_sold,
+            'sold_drinks': sold_drinks,
+            'expenses': expenses,
+            'today': today,
+        }
+        return render(request, 'Email/report.html', context)
+
+    def post(self, request, *args, **kwargs):
+        # Get today's date
+        today = datetime.now().date()
+
+        # Fetch data for the report
+        dashboard = Dashmodel.objects.first()  # Assuming there is only one dashboard entry
+        sold_drinks = SoldDrinks.objects.filter(date__date=today)
+        expenses = Expenses.objects.filter(date__date=today)
+        drinks = Drinks.objects.all()
+
+        # Calculate totals
+        total_sales = sum(drink.total for drink in sold_drinks)
+        total_expenses = sum(expense.price for expense in expenses)
+        stocks_added = sum(drink.added_stock for drink in drinks)
+        stocks_sold = sum(drink.sold_stock for drink in drinks)
+
+        # Prepare the context for the PDF
+        context = {
+            'dashboard': dashboard,
+            'total_sales': total_sales,
+            'total_expenses': total_expenses,
+            'stocks_added': stocks_added,
+            'stocks_sold': stocks_sold,
+            'sold_drinks': sold_drinks,
+            'expenses': expenses,
+            'today': today,
+        }
+
+        # Render the HTML template to a string
+        html_content = render_to_string('Email/report.html', context)
+
+        # Create the PDF from HTML using WeasyPrint
+        pdf_file = weasyprint.HTML(string=html_content).write_pdf()
+
+        # Create an HTTP response with the PDF content
+        response = HttpResponse(pdf_file, content_type='application/pdf')
+        response['Content-Disposition'] = 'attachment; filename="daily_report.pdf"'
+
+        return response

@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'Home.apps.HomeConfig',
     'Authentications.apps.AuthenticationsConfig',
+    'TwinsAdminUsers.apps.TwinsadminusersConfig',
 ]
 
 MIDDLEWARE = [

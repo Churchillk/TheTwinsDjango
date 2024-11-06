@@ -12,4 +12,5 @@ urlpatterns = [
     path('add_expense/', HomeViews.AddExpenses.as_view(), name="add_expense"),
     path('contacts/', HomeViews.ContactsView.as_view(), name='contacts'),
     path('debts/', HomeViews.Debts.as_view(), name="debts"),
+    path('daily-report/', HomeViews.DailyReportView.as_view(), name='daily_report'),
 ]
