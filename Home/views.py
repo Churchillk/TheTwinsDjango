@@ -11,15 +11,23 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 import pytz
 from django.views.generic import View
+import random, string
 
 # pdfgen
-from django.http import HttpResponse, FileResponse
+from django.http import HttpResponse
 import weasyprint
 from django.template.loader import render_to_string
+import base64
+from django.conf import settings
 
 from django.template.loader import get_template
 from datetime import datetime
 from django.contrib.auth.models import User
+
+# timezone kenya
+kenya_timezone = pytz.timezone('Africa/Nairobi')
+utc_now = datetime.now(pytz.utc)# Getting the current time in UTC
+kenya_time = utc_now.astimezone(kenya_timezone)
 
 class HomeView(LoginRequiredMixin, ListView):
     model = OrderedDrinks
@@ -235,24 +243,30 @@ class Debts(ListView):
     
 class DailyReportView(View):
     def get(self, request, *args, **kwargs):
-        # Get today's date
-        today = datetime.now().date()
+        today = kenya_time
 
         # Fetch data for the report
-        dashboard = Dashmodel.objects.first()  # Assuming there is only one dashboard entry
+        dashboard = Dashmodel.objects.first()
         sold_drinks = SoldDrinks.objects.filter(date__date=today)
         expenses = Expenses.objects.filter(date__date=today)
         drinks = Drinks.objects.all()
+        debts = SoldDrinks.objects.filter(status='Debt')
 
         # Calculate totals
         total_sales = sum(drink.total for drink in sold_drinks)
         total_expenses = sum(expense.price for expense in expenses)
         stocks_added = sum(drink.added_stock for drink in drinks)
         stocks_sold = sum(drink.sold_stock for drink in drinks)
+
+        # Encode logo as Base64
+        logo_path = settings.BASE_DIR / 'Home/static/assets/images/logo.png'
+        with open(logo_path, "rb") as image_file:
+            logo_base64 = base64.b64encode(image_file.read()).decode('utf-8')
 
         # Prepare the data for the preview
         context = {
             'dashboard': dashboard,
+            'drinks': drinks,
             'total_sales': total_sales,
             'total_expenses': total_expenses,
             'stocks_added': stocks_added,
@@ -260,18 +274,20 @@ class DailyReportView(View):
             'sold_drinks': sold_drinks,
             'expenses': expenses,
             'today': today,
+            'debts': debts,
+            'logo_base64': logo_base64,
         }
         return render(request, 'Email/report.html', context)
 
     def post(self, request, *args, **kwargs):
-        # Get today's date
-        today = datetime.now().date()
+        today = kenya_time
 
         # Fetch data for the report
-        dashboard = Dashmodel.objects.first()  # Assuming there is only one dashboard entry
+        dashboard = Dashmodel.objects.first()
         sold_drinks = SoldDrinks.objects.filter(date__date=today)
         expenses = Expenses.objects.filter(date__date=today)
         drinks = Drinks.objects.all()
+        debts = SoldDrinks.objects.filter(status='Debt')
 
         # Calculate totals
         total_sales = sum(drink.total for drink in sold_drinks)
@@ -279,9 +295,16 @@ class DailyReportView(View):
         stocks_added = sum(drink.added_stock for drink in drinks)
         stocks_sold = sum(drink.sold_stock for drink in drinks)
 
+        # Encode logo as Base64
+        logo_path = settings.BASE_DIR / 'Home/static/assets/images/logo.png'
+        with open(logo_path, "rb") as image_file:
+            logo_base64 = base64.b64encode(image_file.read()).decode('utf-8')
+
         # Prepare the context for the PDF
         context = {
             'dashboard': dashboard,
+            'debts': debts,
+            'drinks': drinks,
             'total_sales': total_sales,
             'total_expenses': total_expenses,
             'stocks_added': stocks_added,
@@ -289,16 +312,18 @@ class DailyReportView(View):
             'sold_drinks': sold_drinks,
             'expenses': expenses,
             'today': today,
+            'report_id': ''.join(random.choices(string.ascii_lowercase + string.digits, k=6)),
+            'logo_base64': logo_base64,
         }
 
         # Render the HTML template to a string
-        html_content = render_to_string('Email/report.html', context)
+        html_content = render_to_string('Email/post_report.html', context)
 
         # Create the PDF from HTML using WeasyPrint
         pdf_file = weasyprint.HTML(string=html_content).write_pdf()
 
         # Create an HTTP response with the PDF content
         response = HttpResponse(pdf_file, content_type='application/pdf')
-        response['Content-Disposition'] = 'attachment; filename="daily_report.pdf"'
+        response['Content-Disposition'] = f'attachment; filename="{today}-report.pdf"'
 
         return response
