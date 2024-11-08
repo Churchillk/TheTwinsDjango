@@ -24,6 +24,9 @@ from django.template.loader import get_template
 from datetime import datetime
 from django.contrib.auth.models import User
 
+# automatic reset
+from django.db import transaction
+
 # timezone kenya
 kenya_timezone = pytz.timezone('Africa/Nairobi')
 utc_now = datetime.now(pytz.utc)# Getting the current time in UTC
@@ -325,5 +328,29 @@ class DailyReportView(View):
         # Create an HTTP response with the PDF content
         response = HttpResponse(pdf_file, content_type='application/pdf')
         response['Content-Disposition'] = f'attachment; filename="{today}-report.pdf"'
+        
+        # Update and reset models after report generation
+        with transaction.atomic():  # Ensure all updates happen in a single transaction
+            # Update `Drinks` model
+            for drink in Drinks.objects.all():
+                drink.opening_stock = drink.closing_stock  # Set opening stock to closing stock
+                drink.added_stock = 0  # Reset added stock
+                drink.sold_stock = 0  # Reset sold stock
+                drink.save()
+
+            # Delete today's SoldDrinks records
+            SoldDrinks.objects.filter(date__date=today).delete()
+
+            # Reset Expenses for today
+            Expenses.objects.filter(date__date=today).delete()
+
+            # Reset debtors
+            SoldDrinks.objects.filter(status='Debt').delete()
+            
+            #reset Expenses
+            Expenses.objects.filter(date__date=today).delete()
+            
+            #reset Order
+            OrderedDrinks.objects.filter(start_date__date=today).delete()
 
         return response
