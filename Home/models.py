@@ -37,15 +37,16 @@ class Drinks(models.Model):
         # Calculate the closing stock
         self.closing_stock = self.opening_stock + self.added_stock - self.sold_stock
 
-        # Check if the closing stock is below the threshold of 6
-        # print(f"Closing stock for {self.name}: {self.closing_stock}")
+        super(Drinks, self).save(*args, **kwargs)  # Save the instance first
+
+        # After saving, check if the closing stock is low and if an order is necessary
         if self.closing_stock < 6:
             print(f"{Back.RED} {self.name} is running low. Stock left: {self.closing_stock} {Style.RESET_ALL}")
+            
+            from .models import OrderedDrinks
 
             # Check if an order already exists for this drink and is still pending
-            from .models import OrderedDrinks
             existing_order = OrderedDrinks.objects.filter(drink=self, order_status='pending').first()
-
             if not existing_order:
                 # Create an order if no pending order exists
                 OrderedDrinks.objects.create(
@@ -54,7 +55,8 @@ class Drinks(models.Model):
                     payment_mode='Cash',
                     order_status='pending'
                 )
-                print(f"{Back.GREEN} order made successfuly {Back.RESET}")
+                print(f"{Back.GREEN} Order made successfully {Back.RESET}")
+
                 # Retrieve all superuser accounts
                 superusers = User.objects.filter(is_superuser=True)
                 superuser_emails = [user.email for user in superusers]
@@ -65,14 +67,15 @@ class Drinks(models.Model):
                             date=kenya_time,
                             email=f'{su_email}'
                         )
-                        print(f"{Back.GREEN} Email Sent successfuly to {su_email} {Back.RESET}")
+                        print(f"{Back.GREEN} Email sent successfully to {su_email} {Back.RESET}")
                 else:
-                    print(f'{Back.RED} No email Found {Style.RESET_ALL}')
-
-        super(Drinks, self).save(*args, **kwargs)
+                    print(f'{Back.RED} No email found {Style.RESET_ALL}')
 
     def __str__(self):
         return f"{self.name}"
+    
+    class Meta:
+        ordering = ['name']
 
 class SoldDrinks(models.Model):
     drink = models.ForeignKey(Drinks, on_delete=models.CASCADE, related_name='sold_drinks')
@@ -112,6 +115,9 @@ class SoldDrinks(models.Model):
 
     def __str__(self):
         return f"{self.drink.name}"
+    
+    class Mete:
+        ordering = ['name']
 
 
 class Expenses(models.Model):
@@ -189,4 +195,5 @@ class Contact(models.Model):
 class MessageUser(models.Model):
     name = models.ForeignKey(Contact, on_delete=models.CASCADE, null=True)
     message = models.TextField(null=True)
+    
     

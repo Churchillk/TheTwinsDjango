@@ -10,7 +10,7 @@ class AdminDash(admin.ModelAdmin):
 
 @admin.register(HomeModels.Drinks)
 class AdminDrinks(admin.ModelAdmin):
-    list_display = ('name', 'cost', 'opening_stock', 'added_stock', 'sold_stock', 'closing_stock')
+    list_display = ('name', 'wholesale', 'cost', 'opening_stock', 'added_stock', 'sold_stock', 'closing_stock')
     
 @admin.register(HomeModels.SoldDrinks)
 class  AdminSoldDrinks(admin.ModelAdmin):
