@@ -1,646 +1,131 @@
 [
-    {
-        "brand": "ALL SEASONS 250ml",
-        "buy": 390,
-        "sell": 550
-    },
-    {
-        "brand": "ALL SEASONS 350ml",
-        "buy": 580,
-        "sell": 750
-    },
-    {
-        "brand": "ALL SESONS 750 ml",
-        "buy": 1185,
-        "sell": 1650
-    },
-    {
-        "brand": "ALVARO CAN 300ml",
-        "buy": 130,
-        "sell": 200
-    },
-    {
-        "brand": "ATLAS CAN 16%",
-        "buy": 210,
-        "sell": 250
-    },
-    {
-        "brand": "BALOZI CAN",
-        "buy": 215,
-        "sell": 270
-    },
-    {
-        "brand": "BEST CREAM ¾",
-        "buy": 1043,
-        "sell": 1650
-    },
-    {
-        "brand": "BEST CREAM ¼",
-        "buy": 374,
-        "sell": 500
-    },
-    {
-        "brand": "BEST GIN ¾",
-        "buy": 782,
-        "sell": 1000
-    },
-    {
-        "brand": "BEST GIN ¼",
-        "buy": 278,
-        "sell": 400
-    },
-    {
-        "brand": "BEST WHISKY ¼",
-        "buy": 330,
-        "sell": 450
-    },
-    {
-        "brand": "BEST WHISKY ¾",
-        "buy": 972,
-        "sell": 1350
-    },
-    {
-        "brand": "BEST VODKA ¾",
-        "buy": 740,
-        "sell": 1000
-    },
-    {
-        "brand": "BEST VODKA ¼",
-        "buy": 261,
-        "sell": 350
-    },
-    {
-        "brand": "BLACK AND WHITE ½",
-        "buy": 605,
-        "sell": 900
-    },
-    {
-        "brand": "BLACK AND WHITE ¾",
-        "buy": 1185,
-        "sell": 1750
-    },
-    {
-        "brand": "BLACK AND WHITE ¼",
-        "buy": 420,
-        "sell": 600
-    },
-    {
-        "brand": "BLACK ICE CAN 330ml",
-        "buy": 185,
-        "sell": 250
-    },
-    {
-        "brand": "BOND 7 WHISKY ½",
-        "buy": 605,
-        "sell": 900
-    },
-    {
-        "brand": "BOND 7 WHISKY ¾",
-        "buy": 1300,
-        "sell": 1750
-    },
-    {
-        "brand": "BOND 7 WHISKY ¼",
-        "buy": 435,
-        "sell": 600
-    },
-    {
-        "brand": "BRAVADO ENERGY",
-        "buy": 31,
-        "sell": 60
-    },
-    {
-        "brand": "BRAVADO TANGAWIZI",
-        "buy": 50,
-        "sell": 60
-    },
-    {
-        "brand": "CAPTAIN MORGAN ¼",
-        "buy": 350,
-        "sell": 450
-    },
-    {
-        "brand": "CAPTAIN MORGAN ¾",
-        "buy": 945,
-        "sell": 1350
-    },
-    {
-        "brand": "CASABUENA RED WINE 750 ML",
-        "buy": 1200
-    },
-    {
-        "brand": "CELLAR CASK 750 ML",
-        "buy": 1045,
-        "sell": 1350
-    },
-    {
-        "brand": "CHAMDO RED WINE 750",
-        "buy": 782,
-        "sell": 1100
-    },
-    {
-        "brand": "CHROME GIN ¾",
-        "buy": 635,
-        "sell": 950
-    },
-    {
-        "brand": "CHROME GIN ¼",
-        "buy": 245,
-        "sell": 300
-    },
-    {
-        "brand": "CHROME LEMON ¼",
-        "buy": 245,
-        "sell": 300
-    },
-    {
-        "brand": "CHROME VODKA ¼",
-        "buy": 245,
-        "sell": 300
-    },
-    {
-        "brand": "CHROME VODKA ¾",
-        "buy": 635,
-        "sell": 950
-    },
-    {
-        "brand": "CHROME TOTS",
-        "buy": 40,
-        "sell": 50
-    },
-    {
-        "brand": "CLUB MAN ½",
-        "buy": 287,
-        "sell": 400
-    },
-    {
-        "brand": "CLUB MAN ¾",
-        "buy": 774,
-        "sell": 1000
-    },
-    {
-        "brand": "COUNTY ¾",
-        "buy": 810,
-        "sell": 950
-    },
-    {
-        "brand": "COUNTY ¼",
-        "buy": 255,
-        "sell": 300
-    },
-    {
-        "brand": "COUNTY TOTS",
-        "buy": 40,
-        "sell": 50
-    },
-    {
-        "brand": "DELMONTE JUICES",
-        "buy": 290,
-        "sell": 350
-    },
-    {
-        "brand": "FAMOUS GROUSE ½",
-        "buy": 1100,
-        "sell": 1650
-    },
-    {
-        "brand": "FAMOUS GROUSE ¾",
-        "buy": 2000,
-        "sell": 3000
-    },
-    {
-        "brand": "FAXE CAN",
-        "buy": 320,
-        "sell": 350
-    },
-    {
-        "brand": "FOUR COUSINS RED 750",
-        "buy": 970,
-        "sell": 1300
-    },
-    {
-        "brand": "FOURTH STRT RED 750",
-        "buy": 940,
-        "sell": 1300
-    },
-    {
-        "brand": "GENERAL MEAKINS ¼",
-        "buy": 235,
-        "sell": 300
-    },
-    {
-        "brand": "GENERAL MEAKINS ¾",
-        "buy": 700,
-        "sell": 950
-    },
-    {
-        "brand": "GENERAL TOTS",
-        "buy": 40,
-        "sell": 50
-    },
-    {
-        "brand": "GILBEYS ½",
-        "buy": 610,
-        "sell": 900
-    },
-    {
-        "brand": "GILBEYS ¼",
-        "buy": 450,
-        "sell": 600
-    },
-    {
-        "brand": "GILBEYS ¾",
-        "buy": 1400,
-        "sell": 1850
-    },
-    {
-        "brand": "GUARANA CAN 330ml",
-        "buy": 185,
-        "sell": 250
-    },
-    {
-        "brand": "GORDONS CAN 300ml",
-        "buy": 185,
-        "sell": 250
-    },
-    {
-        "brand": "GUINESS CAN 500ml",
-        "buy": 235,
-        "sell": 280
-    },
-    {
-        "brand": "HALF LOAF VODKA ¼",
-        "buy": 130,
-        "sell": 250
-    },
-    {
-        "brand": "HUNTERS ¼",
-        "buy": 350,
-        "sell": 400
-    },
-    {
-        "brand": "HUNTERS ½",
-        "buy": 480,
-        "sell": 600
-    },
-    {
-        "brand": "HUNTERS ¾",
-        "buy": 1000,
-        "sell": 1300
-    },
-    {
-        "brand": "HUNTERS TOTS",
-        "buy": 80,
-        "sell": 100
-    },
-    {
-        "brand": "IMPERIAL WHISKEY ¼",
-        "buy": 332,
-        "sell": 550
-    },
-    {
-        "brand": "IMPERIAL WHISKEY ¾",
-        "buy": 881,
-        "sell": 1300
-    },
-    {
-        "brand": "JONNIE WALKER ½",
-        "buy": 1650,
-        "sell": 2000
-    },
-    {
-        "brand": "JONNIE WALKER ¾",
-        "buy": 3150,
-        "sell": 4100
-    },
-    {
-        "brand": "KANE EXTRA ¼",
-        "buy": 220,
-        "sell": 300
-    },
-    {
-        "brand": "KANE EXTRA ¾",
-        "buy": 600,
-        "sell": 900
-    },
-    {
-        "brand": "KANE EXTRA TOTS",
-        "buy": 40,
-        "sell": 50
-    },
-    {
-        "brand": "KENYA CANE ¼",
-        "buy": 285,
-        "sell": 400
-    },
-    {
-        "brand": "KENYA CANE ½",
-        "buy": 370,
-        "sell": 550
-    },
-    {
-        "brand": "KENYA CANE ¾",
-        "buy": 705,
-        "sell": 950
-    },
-    {
-        "brand": "KENYA KING ¼",
-        "buy": 245,
-        "sell": 300
-    },
-    {
-        "brand": "KENYA KING ¾",
-        "buy": 700,
-        "sell": 950
-    },
-    {
-        "brand": "KIBAO ¾",
-        "buy": 660,
-        "sell": 950
-    },
-    {
-        "brand": "KIBAO ¼",
-        "buy": 230,
-        "sell": 300
-    },
-    {
-        "brand": "KIBAO ½",
-        "buy": 365,
-        "sell": 550
-    },
-    {
-        "brand": "KIBAO TOTS",
-        "buy": 40,
-        "sell": 50
-    },
-    {
-        "brand": "KING FISHER",
-        "buy": 300,
-        "sell": 300
-    },
-    {
-        "brand": "LEGEND BRANDY ¾",
-        "buy": 600,
-        "sell": 900
-    },
-    {
-        "brand": "LEGEND BRANDY ¼",
-        "buy": 210,
-        "sell": 280
-    },
-    {
-        "brand": "LEMONADE",
-        "buy": 42,
-        "sell": 70
-    },
-    {
-        "brand": "MR. DOWEL",
-        "buy": 320,
-        "sell": 350
-    },
-    {
-        "brand": "NAPOLEON GOLD ¼",
-        "buy": 245,
-        "sell": 300
-    },
-    {
-        "brand": "NAPOLEON GOLD ¾",
-        "buy": 700,
-        "sell": 950
-    },
-    {
-        "brand": "NAPOLEON TOTS",
-        "buy": 40,
-        "sell": 50
-    },
-    {
-        "brand": "OJ 12%",
-        "buy": 220,
-        "sell": 300
-    },
-    {
-        "brand": "OJ 16 STRONG",
-        "buy": 220,
-        "sell": 300
-    },
-    {
-        "brand": "PATRIOT VODKA ¼",
-        "buy": 185,
-        "sell": 250
-    },
-    {
-        "brand": "PISTON VODKA ¼",
-        "buy": 165,
-        "sell": 250
-    },
-    {
-        "brand": "PREDATOR",
-        "buy": 63,
-        "sell": 80
-    },
-    {
-        "brand": "RED BULL",
-        "buy": 190,
-        "sell": 250
-    },
-    {
-        "brand": "RICHOT ¼",
-        "buy": 435,
-        "sell": 600
-    },
-    {
-        "brand": "RICHOT ½",
-        "buy": 605,
-        "sell": 900
-    },
-    {
-        "brand": "RICHOT ¾",
-        "buy": 1300,
-        "sell": 1850
-    },
-    {
-        "brand": "SAFARI 1LTR",
-        "buy": 42,
-        "sell": 80
-    },
-    {
-        "brand": "SAFARI 500ML",
-        "buy": 21,
-        "sell": 50
-    },
-    {
-        "brand": "SHARK ENERGY",
-        "buy": 175,
-        "sell": 250
-    },
-    {
-        "brand": "SMART VODKA",
-        "buy": 120,
-        "sell": 250
-    },
-    {
-        "brand": "SMIRNOFF VODKA ¼",
-        "buy": 435,
-        "sell": 600
-    },
-    {
-        "brand": "SMIRNOFF VODKA ½",
-        "buy": 605,
-        "sell": 900
-    },
-    {
-        "brand": "SMIRNOFF VODKA ¾",
-        "buy": 1300,
-        "sell": 1850
-    },
-    {
-        "brand": "SNAP CAN",
-        "buy": 185,
-        "sell": 250
-    },
-    {
-        "brand": "SODA 300ML",
-        "buy": 33,
-        "sell": 50
-    },
-    {
-        "brand": "SODA 500ML",
-        "buy": 50,
-        "sell": 80
-    },
-    {
-        "brand": "ST.ANNS WHITE 750ML",
-        "buy": 920,
-        "sell": 1200
-    },
-    {
-        "brand": "STEAM ENERGY 300ml",
-        "buy": 35,
-        "sell": 60
-    },
-    {
-        "brand": "STEAM ENERGY 400ml",
-        "buy": 61,
-        "sell": 80
-    },
-    {
-        "brand": "SUPREME VODKA ¼",
-        "buy": 250,
-        "sell": 300
-    },
-    {
-        "brand": "SUPREME VODKA ¾",
-        "buy": 626,
-        "sell": 900
-    },
-    {
-        "brand": "SAVANNA DRY",
-        "buy": 260,
-        "sell": 350
-    },
-    {
-        "brand": "TRIPPLE ACE ¼",
-        "buy": 217,
-        "sell": 300
-    },
-    {
-        "brand": "TRIPPLE ACE ¾",
-        "buy": 575,
-        "sell": 850
-    },
-    {
-        "brand": "TRUST/KISS",
-        "buy": 50,
-        "sell": 50
-    },
-    {
-        "brand": "TUNDA JUICE",
-        "buy": 75,
-        "sell": 100
-    },
-    {
-        "brand": "TUSKER CAN 500ml",
-        "buy": 220,
-        "sell": 250
-    },
-    {
-        "brand": "TUSKER CIDER",
-        "buy": 255,
-        "sell": 280
-    },
-    {
-        "brand": "TYCOON VODKA",
-        "buy": 180,
-        "sell": 250
-    },
-    {
-        "brand": "V&A ¾",
-        "buy": 810,
-        "sell": 1650
-    },
-    {
-        "brand": "V&A ¼",
-        "buy": 315,
-        "sell": 400
-    },
-    {
-        "brand": "VAT ¼",
-        "buy": 525,
-        "sell": 650
-    },
-    {
-        "brand": "VAT 69 ½",
-        "buy": 800,
-        "sell": 1000
-    },
-    {
-        "brand": "VAT 69 ¾",
-        "buy": 1470,
-        "sell": 1850
-    },
-    {
-        "brand": "VICEROY ¼",
-        "buy": 262,
-        "sell": 600
-    },
-    {
-        "brand": "VICEROY ½",
-        "buy": 678,
-        "sell": 900
-    },
-    {
-        "brand": "VICEROY ¾",
-        "buy": 1287,
-        "sell": 1850
-    },
-    {
-        "brand": "WHITE CAP CAN 500ml",
-        "buy": 235,
-        "sell": 280
-    },
-    {
-        "brand": "WHITE PEARL ¼",
-        "buy": 255,
-        "sell": 300
-    },
-    {
-        "brand": "WHITE PEARL ¾",
-        "buy": 750,
-        "sell": 900
-    },
-    {
-        "brand": "WILLIAM LAWSONS ½",
-        "buy": 800,
-        "sell": 1100
-    },
-    {
-        "brand": "WILLIAM LAWSONS ¾",
-        "buy": 1500,
-        "sell": 1950
-    },
-    {
-        "brand": "WILLIAM LAWSON CAN",
-        "buy": 220,
-        "sell": 250
-    }   
+    { "brand": "ALL SEASONS 250ml", "abv": "AS1/4", "buy": 390, "sell": 550 },
+    { "brand": "ALL SEASONS 350ml", "abv": "AS1/2", "buy": 580, "sell": 750 },
+    { "brand": "ALL SESONS 750 ml", "abv": "AS3/4", "buy": 1185, "sell": 1650 },
+    { "brand": "ALVARO CAN 300ml", "abv": "AC", "buy": 130, "sell": 200 },
+    { "brand": "ATLAS CAN 16%", "abv": "AC", "buy": 210, "sell": 250 },
+    { "brand": "BALOZI CAN", "abv": "BC", "buy": 215, "sell": 270 },
+    { "brand": "BEST CREAM ¾", "abv": "BC3/4", "buy": 1043, "sell": 1650 },
+    { "brand": "BEST CREAM ¼", "abv": "BC1/4", "buy": 374, "sell": 500 },
+    { "brand": "BEST GIN ¾", "abv": "BG3/4", "buy": 782, "sell": 1000 },
+    { "brand": "BEST GIN ¼", "abv": "BG1/4", "buy": 278, "sell": 400 },
+    { "brand": "BEST WHISKY ¼", "abv": "BW1/4", "buy": 330, "sell": 450 },
+    { "brand": "BEST WHISKY ¾", "abv": "BW3/4", "buy": 972, "sell": 1350 },
+    { "brand": "BEST VODKA ¾", "abv": "BV3/4", "buy": 740, "sell": 1000 },
+    { "brand": "BEST VODKA ¼", "abv": "BV1/4", "buy": 261, "sell": 350 },
+    { "brand": "BLACK AND WHITE ½", "abv": "BW1/2", "buy": 605, "sell": 900 },
+    { "brand": "BLACK AND WHITE ¾", "abv": "BW3/4", "buy": 1185, "sell": 1750 },
+    { "brand": "BLACK AND WHITE ¼", "abv": "BW1/4", "buy": 420, "sell": 600 },
+    { "brand": "BLACK ICE CAN 330ml", "abv": "BIC", "buy": 185, "sell": 250 },
+    { "brand": "BOND 7 WHISKY ½", "abv": "B7W1/2", "buy": 605, "sell": 900 },
+    { "brand": "BOND 7 WHISKY ¾", "abv": "B7W3/4", "buy": 1300, "sell": 1750 },
+    { "brand": "BOND 7 WHISKY ¼", "abv": "B7W1/4", "buy": 435, "sell": 600 },
+    { "brand": "BRAVADO ENERGY", "abv": "BE", "buy": 31, "sell": 60 },
+    { "brand": "BRAVADO TANGAWIZI", "abv": "BT", "buy": 50, "sell": 60 },
+    { "brand": "CAPTAIN MORGAN ¼", "abv": "CM1/4", "buy": 350, "sell": 450 },
+    { "brand": "CAPTAIN MORGAN ¾", "abv": "CM3/4", "buy": 945, "sell": 1350 },
+    { "brand": "CASABUENA RED WINE 750 ML", "abv": "CRW750", "buy": 1200 },
+    { "brand": "CELLAR CASK 750 ML", "abv": "CC750", "buy": 1045, "sell": 1350 },
+    { "brand": "CHAMDO RED WINE 750", "abv": "CRW750", "buy": 782, "sell": 1100 },
+    { "brand": "CHROME GIN ¾", "abv": "CG3/4", "buy": 635, "sell": 950 },
+    { "brand": "CHROME GIN ¼", "abv": "CG1/4", "buy": 245, "sell": 300 },
+    { "brand": "CHROME LEMON ¼", "abv": "CL1/4", "buy": 245, "sell": 300 },
+    { "brand": "CHROME VODKA ¼", "abv": "CV1/4", "buy": 245, "sell": 300 },
+    { "brand": "CHROME VODKA ¾", "abv": "CV3/4", "buy": 635, "sell": 950 },
+    { "brand": "CHROME TOTS", "abv": "CT", "buy": 40, "sell": 50 },
+    { "brand": "CLUB MAN ½", "abv": "CM1/2", "buy": 287, "sell": 400 },
+    { "brand": "CLUB MAN ¾", "abv": "CM3/4", "buy": 774, "sell": 1000 },
+    { "brand": "COUNTY ¾", "abv": "C3/4", "buy": 810, "sell": 950 },
+    { "brand": "COUNTY ¼", "abv": "C1/4", "buy": 255, "sell": 300 },
+    { "brand": "COUNTY TOTS", "abv": "CT", "buy": 40, "sell": 50 },
+    { "brand": "DELMONTE JUICES", "abv": "DJ", "buy": 290, "sell": 350 },
+    { "brand": "FAMOUS GROUSE ½", "abv": "FG1/2", "buy": 1100, "sell": 1650 },
+    { "brand": "FAMOUS GROUSE ¾", "abv": "FG3/4", "buy": 2000, "sell": 3000 },
+    { "brand": "FAXE CAN", "abv": "FC", "buy": 320, "sell": 350 },
+    { "brand": "FOUR COUSINS RED 750", "abv": "FCR750", "buy": 970, "sell": 1300 },
+    { "brand": "FOURTH STRT RED 750", "abv": "FSR750", "buy": 940, "sell": 1300 },
+    { "brand": "GENERAL MEAKINS ¼", "abv": "GM1/4", "buy": 235, "sell": 300 },
+    { "brand": "GENERAL MEAKINS ¾", "abv": "GM3/4", "buy": 700, "sell": 950 },
+    { "brand": "GENERAL TOTS", "abv": "GT", "buy": 40, "sell": 50 },
+    { "brand": "GILBEYS ½", "abv": "G1/2", "buy": 610, "sell": 900 },
+    { "brand": "GILBEYS ¼", "abv": "G1/4", "buy": 450, "sell": 600 },
+    { "brand": "GILBEYS ¾", "abv": "G3/4", "buy": 1400, "sell": 1850 },
+    { "brand": "GUARANA CAN 330ml", "abv": "GC330", "buy": 185, "sell": 250 },
+    { "brand": "GORDONS CAN 300ml", "abv": "GC300", "buy": 185, "sell": 250 },
+    { "brand": "GUINESS CAN 500ml", "abv": "GC500", "buy": 235, "sell": 280 },
+    { "brand": "HALF LOAF VODKA ¼", "abv": "HLV1/4", "buy": 130, "sell": 250 },
+    { "brand": "HUNTERS ¼", "abv": "H1/4", "buy": 350, "sell": 400 },
+    { "brand": "HUNTERS ½", "abv": "H1/2", "buy": 480, "sell": 600 },
+    { "brand": "HUNTERS ¾", "abv": "H3/4", "buy": 1000, "sell": 1300 },
+    { "brand": "HUNTERS TOTS", "abv": "HT", "buy": 80, "sell": 100 },
+    { "brand": "IMPERIAL WHISKEY ¼", "abv": "IW1/4", "buy": 332, "sell": 550 },
+    { "brand": "IMPERIAL WHISKEY ¾", "abv": "IW3/4", "buy": 881, "sell": 1300 },
+    { "brand": "JONNIE WALKER ½", "abv": "JW1/2", "buy": 1650, "sell": 2000 },
+    { "brand": "JONNIE WALKER ¾", "abv": "JW3/4", "buy": 3150, "sell": 4100 },
+    { "brand": "KANE EXTRA ¼", "abv": "KE1/4", "buy": 220, "sell": 300 },
+    { "brand": "KANE EXTRA ¾", "abv": "KE3/4", "buy": 600, "sell": 900 },
+    { "brand": "KANE EXTRA TOTS", "abv": "KET", "buy": 40, "sell": 50 },
+    { "brand": "KENYA CANE ¼", "abv": "KC1/4", "buy": 285, "sell": 400 },
+    { "brand": "KENYA CANE ½", "abv": "KC1/2", "buy": 370, "sell": 550 },
+    { "brand": "KENYA CANE ¾", "abv": "KC3/4", "buy": 705, "sell": 950 },
+    { "brand": "KENYA KING ¼", "abv": "KK1/4", "buy": 245, "sell": 300 },
+    { "brand": "KENYA KING ¾", "abv": "KK3/4", "buy": 700, "sell": 950 },
+    { "brand": "KIBAO ¾", "abv": "K3/4", "buy": 660, "sell": 950 },
+    { "brand": "KIBAO ¼", "abv": "K1/4", "buy": 230, "sell": 300 },
+    { "brand": "KIBAO ½", "abv": "K1/2", "buy": 365, "sell": 550 },
+    { "brand": "KIBAO TOTS", "abv": "KT", "buy": 40, "sell": 50 },
+    { "brand": "KING FISHER", "abv": "KF", "buy": 300, "sell": 300 },
+    { "brand": "LEGEND BRANDY ¾", "abv": "LB3/4", "buy": 600, "sell": 900 },
+    { "brand": "LEGEND BRANDY ¼", "abv": "LB1/4", "buy": 210, "sell": 280 },
+    { "brand": "LEMONADE", "abv": "L", "buy": 42, "sell": 70 },
+    { "brand": "MR. DOWEL", "abv": "MD", "buy": 320, "sell": 350 },
+    { "brand": "NAPOLEON GOLD ¼", "abv": "NG1/4", "buy": 245, "sell": 300 },
+    { "brand": "NAPOLEON GOLD ¾", "abv": "NG3/4", "buy": 700, "sell": 950 },
+    { "brand": "NAPOLEON TOTS", "abv": "NT", "buy": 40, "sell": 50 },
+    { "brand": "OJ 12%", "abv": "OJ12", "buy": 220, "sell": 300 },
+    { "brand": "OJ 16 STRONG", "abv": "OJ16", "buy": 220, "sell": 300 },
+    { "brand": "PATRIOT VODKA ¼", "abv": "PV1/4", "buy": 185, "sell": 250 },
+    { "brand": "PISTON VODKA ¼", "abv": "PV1/4", "buy": 165, "sell": 250 },
+    { "brand": "PREDATOR", "abv": "P", "buy": 63, "sell": 80 },
+    { "brand": "RED BULL", "abv": "RB", "buy": 190, "sell": 250 },
+    { "brand": "RICHOT ¼", "abv": "R1/4", "buy": 435, "sell": 600 },
+    { "brand": "RICHOT ½", "abv": "R1/2", "buy": 605, "sell": 900 },
+    { "brand": "RICHOT ¾", "abv": "R3/4", "buy": 1300, "sell": 1850 },
+    { "brand": "SAFARI 1LTR", "abv": "S1L", "buy": 42, "sell": 80 },
+    { "brand": "SAFARI 500ML", "abv": "S500", "buy": 21, "sell": 50 },
+    { "brand": "SHARK ENERGY", "abv": "SE", "buy": 175, "sell": 250 },
+    { "brand": "SMART VODKA", "abv": "SV", "buy": 120, "sell": 250 },
+    { "brand": "SMIRNOFF VODKA ¼", "abv": "SV1/4", "buy": 435, "sell": 600 },
+    { "brand": "SMIRNOFF VODKA ½", "abv": "SV1/2", "buy": 605, "sell": 900 },
+    { "brand": "SMIRNOFF VODKA ¾", "abv": "SV3/4", "buy": 1300, "sell": 1850 },
+    { "brand": "SNAP CAN", "abv": "SC", "buy": 185, "sell": 250 },
+    { "brand": "SODA 300ML", "abv": "S300", "buy": 33, "sell": 50 },
+    { "brand": "SODA 500ML", "abv": "S500", "buy": 50, "sell": 80 },
+    { "brand": "ST.ANNS WHITE 750ML", "abv": "SAW750", "buy": 920, "sell": 1200 },
+    { "brand": "STEAM ENERGY 300ml", "abv": "SE300", "buy": 35, "sell": 60 },
+    { "brand": "STEAM ENERGY 400ml", "abv": "SE400", "buy": 61, "sell": 80 },
+    { "brand": "SUPREME VODKA ¼", "abv": "SV1/4", "buy": 250, "sell": 300 },
+    { "brand": "SUPREME VODKA ¾", "abv": "SV3/4", "buy": 626, "sell": 900 },
+    { "brand": "SAVANNA DRY", "abv": "SD", "buy": 260, "sell": 350 },
+    { "brand": "TRIPPLE ACE ¼", "abv": "TA1/4", "buy": 217, "sell": 300 },
+    { "brand": "TRIPPLE ACE ¾", "abv": "TA3/4", "buy": 575, "sell": 850 },
+    { "brand": "TRUST/KISS", "abv": "TK", "buy": 50, "sell": 50 },
+    { "brand": "TUNDA JUICE", "abv": "TJ", "buy": 75, "sell": 100 },
+    { "brand": "TUSKER CAN 500ml", "abv": "TC500", "buy": 220, "sell": 250 },
+    { "brand": "TUSKER CIDER", "abv": "TC", "buy": 255, "sell": 280 },
+    { "brand": "TYCOON VODKA", "abv": "TV", "buy": 180, "sell": 250 },
+    { "brand": "V&A ¾", "abv": "V&A3/4", "buy": 810, "sell": 1650 },
+    { "brand": "V&A ¼", "abv": "V&A1/4", "buy": 315, "sell": 400 },
+    { "brand": "VAT ¼", "abv": "V1/4", "buy": 525, "sell": 650 },
+    { "brand": "VAT 69 ½", "abv": "V69 1/2", "buy": 800, "sell": 1000 },
+    { "brand": "VAT 69 ¾", "abv": "V69 3/4", "buy": 1470, "sell": 1850 },
+    { "brand": "VICEROY ¼", "abv": "VIC1/4", "buy": 262, "sell": 600 },
+    { "brand": "VICEROY ½", "abv": "VIC1/2", "buy": 678, "sell": 900 },
+    { "brand": "VICEROY ¾", "abv": "VIC3/4", "buy": 1287, "sell": 1850 },
+    { "brand": "WHITE CAP CAN 500ml", "abv": "WCC500", "buy": 235, "sell": 280 },
+    { "brand": "WHITE PEARL ¼", "abv": "WP1/4", "buy": 255, "sell": 300 },
+    { "brand": "WHITE PEARL ¾", "abv": "WP3/4", "buy": 750, "sell": 900 },
+    { "brand": "WILLIAM LAWSONS ½", "abv": "WL1/2", "buy": 800, "sell": 1100 },
+    { "brand": "WILLIAM LAWSONS ¾", "abv": "WL3/4", "buy": 1500, "sell": 1950 },
+    { "brand": "WILLIAM LAWSON CAN", "abv": "WLC", "buy": 220, "sell": 250 }
 ]

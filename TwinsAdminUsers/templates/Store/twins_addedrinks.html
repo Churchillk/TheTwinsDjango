@@ -1,0 +1,147 @@
+{% extends "Store/base.html" %}
+
+{% load static %}
+
+{% block title %}Twins Added Drinks{% endblock title %}
+
+{% block body %}
+
+<div class="row">
+  <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-9">
+            <div class="d-flex align-items-center align-self-start">
+              <h3 class="mb-0">Ksh {{ dashboard.cash_at_hand }}</h3>
+              <p class="text-success ms-2 mb-0 font-weight-medium">+3.5%</p>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="icon icon-box-success ">
+              <span class="mdi mdi-arrow-top-right icon-item"></span>
+            </div>
+          </div>
+        </div>
+        <h6 class="text-muted font-weight-normal">Cash at Hand</h6>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-9">
+            <div class="d-flex align-items-center align-self-start">
+              <h3 class="mb-0">Ksh {{ dashboard.cash_at_bank }}</h3>
+              <p class="text-success ms-2 mb-0 font-weight-medium">+11%</p>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="icon icon-box-success">
+              <span class="mdi mdi-arrow-top-right icon-item"></span>
+            </div>
+          </div>
+        </div>
+        <h6 class="text-muted font-weight-normal">Cash At Bank</h6>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-9">
+            <div class="d-flex align-items-center align-self-start">
+              <h3 class="mb-0">Ksh {{ dashboard.expenses }}</h3>
+              <p class="text-danger ms-2 mb-0 font-weight-medium">-2.4%</p>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="icon icon-box-danger">
+              <span class="mdi mdi-arrow-bottom-left icon-item"></span>
+            </div>
+          </div>
+        </div>
+        <h6 class="text-muted font-weight-normal">Expenses</h6>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-9">
+            <div class="d-flex align-items-center align-self-start">
+              <h3 class="mb-0">Ksh {{ dashboard.total_sales }}</h3>
+              <p class="text-success ms-2 mb-0 font-weight-medium">+3.5%</p>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="icon icon-box-success ">
+              <span class="mdi mdi-arrow-top-right icon-item"></span>
+            </div>
+          </div>
+        </div>
+        <h6 class="text-muted font-weight-normal">Total Sales</h6>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row ">
+    <div class="col-12 grid-margin">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Added Drinks for {{ kenya_time }}</h4>
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>
+                    <div class="form-check form-check-muted m-0">
+                      <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" id="check-all">
+                      </label>
+                    </div>
+                  </th>
+                  <th> ID </th>
+                  <th> Drink </th>
+                  <th> Cost </th>
+                  <th> Payment </th>
+                  <th> Opening Stock </th>
+                  <th> Added Stock </th>
+                  <th> Sold Stock </th>
+                  <th> Closing Stock </th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for drink in drinks %}
+                <tr>
+                  <td>
+                    <div class="form-check form-check-muted m-0">
+                      <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input">
+                      </label>
+                    </div>
+                  </td>
+                  <td> {{ drink.drink.id }} </td>
+                  <td> {{ drink.drink.name }}</td>
+                  <td> {{ drink.drink.cost }} </td>
+                  {% if drink.payment_mode == 'Debt' %}<td class='text-danger'> {{ drink.payment_mode }} </td> {% else %}<td class='text-success'> {{ drink.payment_mode }} </td>{% endif %}
+                  <td> {{ drink.drink.opening_stock }} </td>
+                  <td> {{ drink.drink.added_stock }} </td>
+                  <td> {{ drink.drink.sold_stock }} </td>
+                  <td> {{ drink.drink.closing_stock }} </td>
+                  {% comment %} <td><div class="badge badge-outline-success"><a href="{% url "selldrink" drink.pk %}">Sell</a></div></td> {% endcomment %}
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock body %}

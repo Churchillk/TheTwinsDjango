@@ -26,6 +26,7 @@ class Dashboard(models.Model):
 
 class Drinks(models.Model):
     name = models.CharField("Drink Name", max_length=50, default="")
+    abv = models.CharField(max_length=3, default='', null=True, blank=True)
     wholesale = models.IntegerField(null=True)
     cost = models.IntegerField(default=100)
     opening_stock = models.IntegerField(default=0)
@@ -118,6 +119,9 @@ class SoldDrinks(models.Model):
     
     class Mete:
         ordering = ['name']
+        
+class AddedDrinks(models.Model):
+    drink = models.ForeignKey(Drinks, on_delete=models.CASCADE)
 
 
 class Expenses(models.Model):

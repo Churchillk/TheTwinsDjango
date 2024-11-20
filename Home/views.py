@@ -52,16 +52,17 @@ class DrinksView(LoginRequiredMixin, ListView):
     model = Drinks
     context_object_name = 'drinks'
     template_name = 'Home/available_drinks.html'
+    paginate_by = 25
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         
-        # Retrieve the Dashboard instance, or create one if it doesn't exist
-        dashboard, created = Dashmodel.objects.get_or_create(pk=1)
-
         # Add the Dashboard instance to the context
+        dashboard, created = Dashmodel.objects.get_or_create(pk=1)
         context['dashboard'] = dashboard
+        
         return context
+
     
 class DailySalesView(LoginRequiredMixin, ListView):
     model = Drinks
