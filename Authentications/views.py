@@ -25,7 +25,6 @@ from django.utils.decorators import method_decorator
 from django.urls import reverse_lazy
 import random
 
-@csrf_exempt
 def register(request):
     pass
     if request.method == "POST":
@@ -102,6 +101,15 @@ class MainLogoutView(LoginRequiredMixin, LogoutView):
             request.session.flush()
             auth_logout(request)
             return redirect('login')
+        return super().dispatch(request, *args, **kwargs)
+
+class AdminLogoutView(LoginRequiredMixin, LogoutView):
+    @method_decorator(never_cache)
+    def dispatch(self, request, *args, **kwargs):
+        if self.request.method == 'GET':
+            request.session.flush()
+            auth_logout(request)
+            return redirect('admin_login')
         return super().dispatch(request, *args, **kwargs)
 
 @login_required
