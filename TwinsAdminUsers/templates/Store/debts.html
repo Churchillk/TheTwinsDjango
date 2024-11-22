@@ -107,9 +107,11 @@
                 </th>
                 <th> Drink </th>
                 <th> Date </th>
-                <th> Price </th>
                 <th> Customer </th>
                 <th> Contact </th>
+                <th> Quantity </th>
+                <th> Price </th>
+                <th> Total </th>
               </tr>
             </thead>
             <tbody>
@@ -124,9 +126,11 @@
                       </td>
                       <td> {{ debt.drink.name }} </td>
                       <td> {{ debt.date }} </td>
-                      <td> {{ debt.drink.cost }} </td>
                       <td> {{ debt.customer }} </td>
                       <td> {{ debt.customer_contact }} </td>
+                      <td> {{ debt.quantity }} </td>
+                      <td> {{ debt.drink.cost }} </td>
+                      <td> {{ debt.total }} </td>
                   </tr>
                 {% endfor %}
             </tbody>

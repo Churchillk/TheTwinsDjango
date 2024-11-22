@@ -59,19 +59,29 @@ class DashView(LoginRequiredMixin, ListView):
         # Add the Dashboard instance to the context
         context['dashboard'] = dashboard
         context['dashdata'] = dashdata
-        context['drinksB20'] = [drink.abv for index, drink in enumerate(EmployeeDrinks.objects.all()) if drink.closing_stock <= 10 and index <= 9]
-        context['drinksidB20'] = [drink.closing_stock for index, drink in enumerate(EmployeeDrinks.objects.all()) if drink.closing_stock <= 10 and index <= 9]
+        context['drinksB20'] = [drink.abv for index, drink in enumerate(EmployeeDrinks.objects.all()) if drink.closing_stock <= 20]
+        context['drinksidB20'] = [drink.closing_stock for index, drink in enumerate(EmployeeDrinks.objects.all()) if drink.closing_stock <= 20]
         return context
     
 
-class TwinsDrinksListView(ListView):
+class TwinsDrinksListView(LoginRequiredMixin, ListView):
     model = EmployeeDrinks
     template_name = 'Store/drinks.html'
     context_object_name = 'drinks'
     paginate_by = 10  # Adjust pagination as needed
     
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        
+        # Retrieve the Dashboard instance, or create one if it doesn't exist
+        dashboard, created = Dashmodel.objects.get_or_create(pk=1)
 
-class TwinsSoldDrinksListView(ListView):
+        # Add the Dashboard instance to the context
+        context['dashboard'] = dashboard
+        return context
+    
+
+class TwinsSoldDrinksListView(LoginRequiredMixin, ListView):
     model = TwinsSoldDrinks
     template_name = 'Store/twins_soldrinks.html'
     context_object_name = 'store_sold_drinks'
@@ -79,10 +89,12 @@ class TwinsSoldDrinksListView(ListView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        dashboard, created = Dashmodel.objects.get_or_create(pk=1)
+        context['dashboard'] = dashboard
         context['kenya_time'] = kenya_time
         return context
     
-class TwinsAddedDrinksListView(ListView):
+class TwinsAddedDrinksListView(LoginRequiredMixin, ListView):
     model = AddedDrinks
     template_name = 'Store/twins_addedrinks.html'
     context_object_name = 'drinks'
@@ -90,41 +102,79 @@ class TwinsAddedDrinksListView(ListView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        dashboard, created = Dashmodel.objects.get_or_create(pk=1)
+        context['dashboard'] = dashboard
         context['kenya_time'] = kenya_time
         return context
 
-class TwinsOrderedDrinksListView(ListView):
+class TwinsOrderedDrinksListView(LoginRequiredMixin, ListView):
     model = StoreOrderedDrinks
     template_name = 'Store/orderd.html'
     context_object_name = 'drinks'
     paginate_by = 10
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        dashboard, created = Dashmodel.objects.get_or_create(pk=1)
+        context['dashboard'] = dashboard
+        return context
 
-class AddDrink(CreateView):
+class AddDrink(LoginRequiredMixin, CreateView):
     model = EmployeeDrinks
     form_class = DrinksForm
     template_name = 'Store/add_drink.html'
     success_url = reverse_lazy('twins_drinks_list')
     
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        
+        # Retrieve the Dashboard instance, or create one if it doesn't exist
+        dashboard, created = Dashmodel.objects.get_or_create(pk=1)
 
-class DeleteDrink(DjangoView):
+        # Add the Dashboard instance to the context
+        context['dashboard'] = dashboard
+        return context
+    
+
+class DeleteDrink(LoginRequiredMixin, DjangoView):
     def get(self, request, pk):
         drink = get_object_or_404(EmployeeDrinks, pk=pk)
         drink.delete()
         return redirect('twins_drinks_list') 
 
-class UpdateDrink(UpdateView):
+class UpdateDrink(LoginRequiredMixin, UpdateView):
     model = EmployeeDrinks
     form_class = DrinksForm
     template_name = 'Store/update_drink.html'
     success_url = reverse_lazy('twins_drinks_list')
     
-class TwinsExpensesListView(ListView):
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        
+        # Retrieve the Dashboard instance, or create one if it doesn't exist
+        dashboard, created = Dashmodel.objects.get_or_create(pk=1)
+
+        # Add the Dashboard instance to the context
+        context['dashboard'] = dashboard
+        return context
+    
+class TwinsExpensesListView(LoginRequiredMixin, ListView):
     model = EmployeeExpenses
     template_name = 'Store/expenses.html'
     context_object_name = 'expenses'
     paginate_by = 10
     
-class AddExpenses(DjangoView):
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        
+        # Retrieve the Dashboard instance, or create one if it doesn't exist
+        dashboard, created = Dashmodel.objects.get_or_create(pk=1)
+
+        # Add the Dashboard instance to the context
+        context['dashboard'] = dashboard
+        return context
+    
+class AddExpenses(LoginRequiredMixin, DjangoView):
     def get(self, request):
         form = ExpenseForm()
         # Get or create the Dashboard instance
@@ -139,14 +189,14 @@ class AddExpenses(DjangoView):
             expense.employee = request.user
             expense.save()
             messages.success(request, 'Expense added successfully')
-            return redirect('expenses')
+            return redirect('twins-expenses')
         
         # Get or create the Dashboard instance
         dashboard, created = Dashmodel.objects.get_or_create(pk=1)
         # Pass dashboard to the context
         return render(request, 'Store/add_expense.html', {'form': form, 'dashboard': dashboard})
 
-class AllUsers(ListView):
+class AllUsers(LoginRequiredMixin, ListView):
     model = User
     template_name = 'Store/users.html'
     context_object_name = 'users'
@@ -181,13 +231,13 @@ def add_user(request):
     }
     return HttpResponse(template.render(context, request))
 
-class DeleteUser(DjangoView):
+class DeleteUser(LoginRequiredMixin, DjangoView):
     def get(self, request, pk):
         user = get_object_or_404(User, pk=pk)
         user.delete()
         return redirect('users') 
 
-class Debts(ListView):
+class Debts(LoginRequiredMixin, ListView):
     model = TwinsSoldDrinks
     context_object_name = 'debtors'
     template_name = 'Store/debts.html'
