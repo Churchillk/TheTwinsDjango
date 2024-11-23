@@ -25,6 +25,7 @@ from django.utils.decorators import method_decorator
 from django.urls import reverse_lazy
 import random
 
+@login_required
 def register(request):
     pass
     if request.method == "POST":

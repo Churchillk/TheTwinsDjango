@@ -3,7 +3,7 @@ from .views import (
     TwinsDrinksListView,
     DashView, custom_admin_login, DeleteUser,
     TwinsSoldDrinksListView, TwinsAddedDrinksListView,
-    TwinsExpensesListView, AddExpenses,
+    TwinsExpensesListView, AddExpenses, UpdateUser,
     TwinsOrderedDrinksListView, Debts, AllUsers,
     AddDrink, UpdateDrink, DeleteDrink, add_user
 )
@@ -22,6 +22,7 @@ urlpatterns = [
     path('twins-expenses/', TwinsExpensesListView.as_view(), name='twins-expenses'),
     path('all-users/', AllUsers.as_view(), name='users'),
     path('add-employee/', add_user, name='add_employee'),
+    path("Update-user/<int:pk>/", UpdateUser.as_view(), name = 'update_user'),
     path("all-users/delete-user/<int:pk>/", DeleteUser.as_view(), name='delete_user'),
     path("twins-debtors/", Debts.as_view(), name='twins_debtors'),
 ]

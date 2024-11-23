@@ -122,6 +122,13 @@
                 <label for="quantity">Confirm Password</label>
                 {{ form.password2 }}
             </div>
+            <div class="col-md-6">
+              <div class="form-check form-check-primary">
+                <label class="form-check-label">
+                  {{ form.is_superuser }} User Status </label>
+              </div>
+          </div>
+          <br>
             <button type="submit" class="btn btn-primary me-2">Submit</button>
           </form>
         </div>
@@ -135,7 +142,7 @@
               <div class="daoughnutchart-wrapper">
                 <canvas id="transaction-history" class="transaction-chart"></canvas>
               </div>
-              <div class="custom-value">$1200 <span>Total</span>
+              <div class="custom-value">{{ dashboard.total_sales }} <span>Total</span>
               </div>
             </div>
           </div>

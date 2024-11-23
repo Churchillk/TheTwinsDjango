@@ -2,9 +2,7 @@
 
 {% load static %}
 
-{% load custom_filters %}
-
-{% block title %}Add Drink To Twins{% endblock title %}
+{% block title %}Add An Employee{% endblock title %}
 
 {% block body %}
 
@@ -95,49 +93,78 @@
     <div class="col-md-6 grid-margin stretch-card">
       <div class="card">
         <div class="card-body">
-          <h4 class="card-title">Add A New Drink<small class='text-success ms-2 mb-0 font-weight-medium'></small></h4>
+          <h4 class="card-title">Add An Employee</h4>
           <form method="POST">
             {% csrf_token %}
             <div class="row">
-              <div class="col-md-6">
-                <div class="form-group row">
-                  <div class="col-sm-12">
-                    {{ form.name }}
-                  </div>
+                <div class="col-md-6">
+                    <div class="form-group row">
+                        <div class="col-sm-12">
+                            <label for="quantity">Employee Name</label>
+                            {{ form.username }}
+                            {% if form.username.errors %}
+                                <ul>
+                                    {% for error in form.username.errors %}
+                                        <li>{{ error }}</li>
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
+                        </div>
+                    </div>
                 </div>
-              </div>
-              <div class="col-md-6">
-                <div class="form-group row">
-                  <div class="col-sm-12">
-                    {{ form.wholesale }}
-                  </div>
+                <div class="col-md-6">
+                    <div class="form-group row">
+                        <div class="col-sm-12">
+                            <label for="quantity">Employee Email</label>
+                            {{ form.email }}
+                            {% if form.email.errors %}
+                                <ul>
+                                    {% for error in form.email.errors %}
+                                        <li>{{ error }}</li>
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
+                        </div>
+                    </div>
                 </div>
-              </div>
-            </div>
-            <div class='row'>
-              <div class="col-md-6">
-                <div class="form-group">
-                  {{ form.opening_stock }}
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="form-group">
-                  {{ form.added_stock }}
-                </div>
-              </div>
             </div>
             <div class="form-group">
-              {{ form.cost }}
+                <label for="quantity">Password</label>
+                {{ form.password1 }}
+                {% if form.password1.errors %}
+                    <ul>
+                        {% for error in form.password1.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
             </div>
             <div class="form-group">
-              {{ form.sold_stock }}
+                <label for="quantity">Confirm Password</label>
+                {{ form.password2 }}
+                {% if form.password2.errors %}
+                    <ul>
+                        {% for error in form.password2.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
             </div>
+            <div class="col-md-6">
+                <div class="form-check form-check-primary">
+                    <label class="form-check-label">
+                        {{ form.is_superuser }} User Status
+                    </label>
+                </div>
+            </div>
+            <br>
             <button type="submit" class="btn btn-primary me-2">Submit</button>
-          </form>
+        </form>
+        
         </div>
       </div>
     </div>
-      <div class="col-md-6 grid-margin stretch-card">
+    <div class="col-md-6 grid-margin stretch-card">
         <div class="card">
           <div class="card-body">
             <h4 class="card-title">Daily Sales</h4>
@@ -145,12 +172,12 @@
               <div class="daoughnutchart-wrapper">
                 <canvas id="transaction-history" class="transaction-chart"></canvas>
               </div>
-              <div class="custom-value">Ksh {{ dashboard.total_sales }} <span>Total</span>
+              <div class="custom-value">{{ dashboard.total_sales }} <span>Total</span>
               </div>
             </div>
           </div>
         </div>
-      </div>
+    </div>
 </div>
 
 {% endblock body %}
@@ -305,6 +332,5 @@
     }
   });
 })(jQuery);
-
 
 {% endblock injectjs %}

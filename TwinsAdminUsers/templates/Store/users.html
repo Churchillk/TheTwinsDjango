@@ -152,7 +152,7 @@
                 <td> {{ user.email }} </td>
                 <td> {{ user.date_joined }} </td>
                 <td> {{ user.user_permissions }} </td>
-                <td><div class="badge badge-outline-warning"><a class="text-warning" href="" style="text-decoration: None; Color: white">Update</a></div></td>
+                <td><div class="badge badge-outline-warning"><a class="text-warning" href="{% url "update_user" user.pk %}" style="text-decoration: None; Color: white">Update</a></div></td>
                 <td><div class="badge badge-outline-danger"><a class="text-danger" href="{% url "delete_user" user.id %}" style="text-decoration: None; Color: white">Delete</a></div></td>
               </tr>
               {% endfor %}

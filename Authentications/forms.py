@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UserChangeForm
 from Home import models as HomeModels
 from .models import Profile
 
@@ -9,11 +9,41 @@ class UserReg(UserCreationForm):
     username = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control p_input', 'placeholder': 'Enter Username'}))
     password1 = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control p_input', 'placeholder': 'Enter Password'}))
     password2 = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control p_input', 'placeholder': 'Confirm Password'}))
+    is_superuser = forms.BooleanField(required=False, widget=forms.CheckboxInput(attrs={'class': "form-check-input", 'type': "checkbox"}))
 
     class Meta:
         model = User
-        fields = ['username', 'email', 'password1', 'password2']
+        fields = ['username', 'email', 'password1', 'password2', 'is_superuser']
         
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        if self.cleaned_data['is_superuser']:
+            user.is_superuser = True
+            user.is_staff = True  # Superusers are also staff members
+        if commit:
+            user.save()
+        return user
+    
+class UserChange(UserChangeForm):
+    email = forms.EmailField(widget=forms.EmailInput(attrs={'class': 'form-control p_input', 'placeholder': 'Enter Email'}))
+    username = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control p_input', 'placeholder': 'Enter Username'}))
+    password1 = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control p_input', 'placeholder': 'Enter Password'}), required=False)
+    password2 = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control p_input', 'placeholder': 'Confirm Password'}), required=False)
+    is_superuser = forms.BooleanField(required=False, widget=forms.CheckboxInput(attrs={'class': "form-check-input", 'type': "checkbox"}))
+
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'password1', 'password2', 'is_superuser']
+        
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        if self.cleaned_data['is_superuser']:
+            user.is_superuser = True
+            user.is_staff = True  # Superusers are also staff members
+        if commit:
+            user.save()
+        return user
+    
 class LoginForm(AuthenticationForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

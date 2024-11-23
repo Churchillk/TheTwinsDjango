@@ -2,6 +2,8 @@
 
 {% load static %}
 
+{% load custom_filters %}
+
 {% block title %}Drinks At Twins{% endblock title %}
 
 {% block body %}
@@ -89,32 +91,88 @@
   </div>
 </div>
 
-<div class="content-wrapper">
-  <div class="row">
-    <div class="col-lg-6 grid-margin stretch-card">
-      <div class="card">
-        <div class="card-body">
-          <h4 class="card-title">Area chart</h4>
-          <canvas id="areaChart" style="height:250px"></canvas>
-        </div>
-      </div>
-    </div>
-    <div class="col-lg-6 grid-margin stretch-card">
-      <div class="card">
-        <div class="card-body">
-          <h4 class="card-title">Bar chart</h4>
-          <canvas id="barChart" style="height:230px"></canvas>
-        </div>
+<div class="row">
+  <div class="col-lg-6 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Drinks Below 20</h4>
+        <canvas id="areaChart" style="height:250px"></canvas>
       </div>
     </div>
   </div>
-  <div class="col-lg-12 grid-margin stretch-card">
+  <div class="col-lg-6 grid-margin stretch-card">
     <div class="card">
       <div class="card-body">
-        <h4 class="card-title">Available Drinks Twins</h4>
-        </p>
+        <h4 class="card-title">Daily Sales</h4>
+        <canvas id="barChart" style="height:230px"></canvas>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row ">
+  <div class="col-12 grid-margin">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Available Drinks</h4>
         <div class="table-responsive">
-          <table class="table table-hover">
+          <!-- Pagination -->
+          <div class="d-flex mt-4 flex-wrap justify-content-between align-items-center">
+            <p class="text-muted mb-0">
+              Showing {{ page_obj.start_index }} to {{ page_obj.end_index }} of {{ page_obj.paginator.count }} entries, {{ page_obj.paginator.count|subtract:page_obj.end_index }} remaining
+            </p>
+            <nav>
+              <ul class="pagination pagination-sm">
+                <!-- First Page Button -->
+                {% if page_obj.has_previous %}
+                  <li class="page-item">
+                    <a href="?page=1" class="page-link" aria-label="First">
+                      <i class="fa fa-fast-backward"></i>
+                    </a>
+                  </li>
+                  <!-- Previous Page Button -->
+                  <li class="page-item">
+                    <a href="?page={{ page_obj.previous_page_number }}" class="page-link" aria-label="Previous">
+                      <i class="fa fa-backward"></i>
+                    </a>
+                  </li>
+                {% else %}
+                  
+                {% endif %}
+                
+                <!-- Page Numbers -->
+                {% for num in page_obj.paginator.page_range %}
+                  {% if num == page_obj.number %}
+                    <li class="page-item active">
+                      <a href="?page={{ num }}" class="page-link">{{ num }}</a>
+                    </li>
+                  {% else %}
+                    <li class="page-item">
+                      <a href="?page={{ num }}" class="page-link">{{ num }}</a>
+                    </li>
+                  {% endif %}
+                {% endfor %}
+                
+                <!-- Next Page Button -->
+                {% if page_obj.has_next %}
+                  <li class="page-item">
+                    <a href="?page={{ page_obj.next_page_number }}" class="page-link" aria-label="Next">
+                      <i class="fa fa-forward"></i>
+                    </a>
+                  </li>
+                  <!-- Last Page Button -->
+                  <li class="page-item">
+                    <a href="?page={{ page_obj.paginator.num_pages }}" class="page-link" aria-label="Last">
+                      <i class="fa fa-fast-forward"></i>
+                    </a>
+                  </li>
+                {% else %}
+                {% endif %}
+              </ul>
+            </nav>
+          </div>
+          <!-- Pagination -->
+          <table class="table">
             <thead>
               <tr>
                 <th>
@@ -150,14 +208,70 @@
                 <td> {{ drink.added_stock }} </td>
                 <td> {{ drink.sold_stock }} </td>
                 <td> {{ drink.closing_stock }} </td>
-                <td><div class="badge badge-outline-success"><a class="text-success" href="{% url "selldrink" drink.pk %}" style="text-decoration: None; Color: white">Add</a></div></td>
-                <td><div class="badge badge-outline-warning"><a class="text-warning" href="{% url "selldrink" drink.pk %}" style="text-decoration: None; Color: white">Update</a></div></td>
-                <td><div class="badge badge-outline-danger"><a class="text-danger" href="{% url "selldrink" drink.pk %}" style="text-decoration: None; Color: white">Delete</a></div></td>
+                <td><div class="badge badge-outline-success"><a class = "text-success" href="{% url "selldrink" drink.pk %}">Sell</a></div></td>
+                <td><div class="badge badge-outline-warning"><a class = "text-warning" href="{% url "update_drink" drink.pk %}">Update</a></div></td>
+                <td><div class="badge badge-outline-danger"><a class = "text-danger" href="{% url "delete_drink" drink.pk %}">Delete</a></div></td>
               </tr>
               {% endfor %}
-              
             </tbody>
           </table>
+          <!-- Pagination -->
+          <div class="d-flex mt-4 flex-wrap justify-content-between align-items-center">
+            <p class="text-muted mb-0">
+              Showing {{ page_obj.start_index }} to {{ page_obj.end_index }} of {{ page_obj.paginator.count }} entries, {{ page_obj.paginator.count|subtract:page_obj.end_index }} remaining
+            </p>
+            <nav>
+              <ul class="pagination pagination-sm">
+                <!-- First Page Button -->
+                {% if page_obj.has_previous %}
+                  <li class="page-item">
+                    <a href="?page=1" class="page-link" aria-label="First">
+                      <i class="fa fa-fast-backward"></i>
+                    </a>
+                  </li>
+                  <!-- Previous Page Button -->
+                  <li class="page-item">
+                    <a href="?page={{ page_obj.previous_page_number }}" class="page-link" aria-label="Previous">
+                      <i class="fa fa-backward"></i>
+                    </a>
+                  </li>
+                {% else %}
+                  
+                {% endif %}
+                
+                <!-- Page Numbers -->
+                {% for num in page_obj.paginator.page_range %}
+                  {% if num == page_obj.number %}
+                    <li class="page-item active">
+                      <a href="?page={{ num }}" class="page-link">{{ num }}</a>
+                    </li>
+                  {% else %}
+                    <li class="page-item">
+                      <a href="?page={{ num }}" class="page-link">{{ num }}</a>
+                    </li>
+                  {% endif %}
+                {% endfor %}
+                
+                <!-- Next Page Button -->
+                {% if page_obj.has_next %}
+                  <li class="page-item">
+                    <a href="?page={{ page_obj.next_page_number }}" class="page-link" aria-label="Next">
+                      <i class="fa fa-forward"></i>
+                    </a>
+                  </li>
+                  <!-- Last Page Button -->
+                  <li class="page-item">
+                    <a href="?page={{ page_obj.paginator.num_pages }}" class="page-link" aria-label="Last">
+                      <i class="fa fa-fast-forward"></i>
+                    </a>
+                  </li>
+                {% else %}
+                {% endif %}
+              </ul>
+            </nav>
+          </div>
+          <!-- Pagination -->
+
         </div>
       </div>
     </div>
@@ -174,11 +288,12 @@ $(function() {
    * Data and config for chartjs
    */
   'use strict';
+  var dashdata = {{ dashdata|safe }};
   var data = {
-    labels: ["2013", "2014", "2014", "2015", "2016", "2017"],
+    labels: ["T.S", "C.A.H", "C.A.B", "Expenses", "Debts"],
     datasets: [{
-      label: '# of Votes',
-      data: [10, 19, 3, 5, 2, 3],
+      label: 'Daily Sales graph',
+      data: dashdata,
       backgroundColor: [
         'rgba(255, 99, 132, 0.2)',
         'rgba(54, 162, 235, 0.2)',
@@ -295,11 +410,13 @@ $(function() {
       animateRotate: true
     }
   };
+  var drinks = {{drinksB20|safe}};
+  var drinksids = {{ drinksidB20|safe }};
   var areaData = {
-    labels: ["2013", "2014", "2015", "2016", "2017"],
+    labels: drinks,
     datasets: [{
-      label: '# of Votes',
-      data: [12, 19, 3, 5, 2, 3],
+      label: 'Drinks Below 10',
+      data: drinksids,
       backgroundColor: [
         'rgba(255, 99, 132, 0.2)',
         'rgba(54, 162, 235, 0.2)',
