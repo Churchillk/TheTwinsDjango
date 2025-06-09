@@ -90,7 +90,7 @@
 </div>
 {% if expenses %}
 <div class="row ">
-  
+
   <div class="col-md-6 grid-margin stretch-card">
     <div class="card">
       <div class="card-body">
@@ -152,7 +152,7 @@
 </div>
 {% else %}
 <div class="row ">
-  
+
   <div class="col-md-12 grid-margin stretch-card">
     <div class="card">
       <div class="card-body">
@@ -181,17 +181,17 @@
   }
   $(function() {
 
-    //check all boxes in order status 
+    //check all boxes in order status
     $("#check-all").click(function () {
       $(".form-check-input").prop('checked', $(this).prop('checked'));
     });
 
-    if ($("#transaction-history").length) { 
+    if ($("#transaction-history").length) {
       const doughnutChartCanvas = document.getElementById('transaction-history');
       new Chart(doughnutChartCanvas, {
         type: 'doughnut',
         data: {
-          labels: ["Cash", "Till","Expense"],
+          labels: ["Cash", "Till", "Expense"],
           datasets: [{
               data: [{{ dashboard.cash_at_hand }}, {{ dashboard.cash_at_bank }}, {{ dashboard.expenses }}],
               backgroundColor: [
@@ -290,7 +290,7 @@
         }
       });
     }
-    if ($("#currentBalanceCircle").length) { 
+    if ($("#currentBalanceCircle").length) {
       var bar = new ProgressBar.Circle(currentBalanceCircle, {
         color: '#ccc',
         // This has to be the same size as the maximum width to
@@ -309,10 +309,10 @@
         step: function(state, circle) {
           circle.path.setAttribute('stroke', state.color);
           circle.path.setAttribute('stroke-width', state.width);
-      
+
           var value = Math.round(circle.value() * 100);
           circle.setText('');
-      
+
         }
       });
 

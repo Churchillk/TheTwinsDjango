@@ -108,7 +108,58 @@
   </div>
 </div>
 -end chart-->
+
+<!-- Daily Sales Chart -->
 <div class="row ">
+  <div class="col-12 grid-margin">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Daily Expenenses</h4>
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>
+                  <div class="form-check form-check-muted m-0">
+                    <label class="form-check-label">
+                      <input type="checkbox" class="form-check-input" id="check-all">
+                    </label>
+                  </div>
+                </th>
+                <th> ID </th>
+                <th> Employee </th>
+                <th> Expense </th>
+                <th> Price </th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for expense in expenses %}
+              <tr>
+                <td>
+                  <div class="form-check form-check-muted m-0">
+                    <label class="form-check-label">
+                      <input type="checkbox" class="form-check-input">
+                    </label>
+                  </div>
+                </td>
+                <td> {{ expense.id }} </td>
+                <td> {{ expense.employee }} </td>
+                <td> {{ expense.expense }}</td>
+                <td> {{ expense.price }} </td>
+                {% comment %} <td><div class="badge badge-outline-success"><a href="{% url "expense" expense.pk %}">Sell</a></div></td> {% endcomment %}
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Daily Sales Chart -->
+
+<!-- Daily Expenses Chart -->
+ <div class="row ">
   <div class="col-12 grid-margin">
     <div class="card">
       <div class="card-body">
@@ -160,6 +211,9 @@
     </div>
   </div>
 </div>
+<!-- End Daily Expenses Chart -->
+
+
 <div class="row">
   <div class="col-md-6 col-xl-4 grid-margin stretch-card">
     <div class="card">
@@ -416,7 +470,7 @@ $(function() {
     }
   };
 
-  
+
   var doughnutPieData = {
     datasets: [{
       data: [30, 40, 30],

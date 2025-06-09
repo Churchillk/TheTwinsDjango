@@ -39,12 +39,13 @@ class HomeView(LoginRequiredMixin, ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        
+
         # Retrieve the Dashboard instance, or create one if it doesn't exist
         dashboard, created = Dashmodel.objects.get_or_create(pk=1)
 
         # Add the Dashboard instance to the context
         context['dashboard'] = dashboard
+        context['expenses'] = Expenses.objects.all()
         return context
 
 
@@ -53,25 +54,25 @@ class DrinksView(LoginRequiredMixin, ListView):
     context_object_name = 'drinks'
     template_name = 'Home/available_drinks.html'
     paginate_by = 25
-    
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        
+
         # Add the Dashboard instance to the context
         dashboard, created = Dashmodel.objects.get_or_create(pk=1)
         context['dashboard'] = dashboard
-        
+
         return context
 
-    
+
 class DailySalesView(LoginRequiredMixin, ListView):
     model = Drinks
     context_object_name = 'drinks'
     template_name = 'Home/available_drinks.html'
-    
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        
+
         # Retrieve the Dashboard instance, or create one if it doesn't exist
         dashboard, created = Dashmodel.objects.get_or_create(pk=1)
 
@@ -83,7 +84,7 @@ class SoldDrinksView(LoginRequiredMixin, ListView):
     model = SoldDrinks
     context_object_name = 'drinks'
     template_name = 'Home/sold_drinks.html'
-    
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         # timezone kenya
@@ -91,7 +92,7 @@ class SoldDrinksView(LoginRequiredMixin, ListView):
         utc_now = datetime.now(pytz.utc)# Getting the current time in UTC
         kenya_time = utc_now.astimezone(kenya_timezone)
         context['kenya_time'] = kenya_time
-        
+
         # Retrieve the Dashboard instance, or create one if it doesn't exist
         dashboard, created = Dashmodel.objects.get_or_create(pk=1)
 
@@ -103,10 +104,10 @@ class OrderedDrinksView(LoginRequiredMixin, ListView):
     model = OrderedDrinks
     context_object_name = 'drinks'
     template_name = 'Home/orderd.html'
-    
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        
+
         # Retrieve the Dashboard instance, or create one if it doesn't exist
         dashboard, created = Dashmodel.objects.get_or_create(pk=1)
 
@@ -119,10 +120,10 @@ class AddedDrinksView(LoginRequiredMixin, ListView):
     model = Drinks
     context_object_name = 'drinks'
     template_name = 'Home/added.html'
-    
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        
+
         # Retrieve the Dashboard instance, or create one if it doesn't exist
         dashboard, created = Dashmodel.objects.get_or_create(pk=1)
 
@@ -135,10 +136,10 @@ class ExpensesView(LoginRequiredMixin, ListView):
     model = Expenses
     context_object_name = 'expenses'
     template_name = 'Home/expenses.html'
-    
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        
+
         # Retrieve the Dashboard instance, or create one if it doesn't exist
         dashboard, created = Dashmodel.objects.get_or_create(pk=1)
 
@@ -162,7 +163,7 @@ class AddExpenses(DjangoView):
             expense.save()
             messages.success(request, 'Expense added successfully')
             return redirect('expenses')
-        
+
         # Get or create the Dashboard instance
         dashboard, created = Dashmodel.objects.get_or_create(pk=1)
         # Pass dashboard to the context
@@ -225,26 +226,26 @@ class SellDrink(DetailView):
         context = self.get_context_data()
         context['form'] = form  # Update the context with the invalid form
         return self.render_to_response(context)
-    
+
 class Debts(ListView):
     model = SoldDrinks
     context_object_name = 'debtors'
     template_name = 'Home/debts.html'
-    
+
     def get_queryset(self):
         # Filter to only include debts
         return super().get_queryset().filter(status='Debt')
-    
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        
+
         # Retrieve the Dashboard instance, or create one if it doesn't exist
         dashboard, created = Dashmodel.objects.get_or_create(pk=1)
 
         # Add the Dashboard instance to the context
         context['dashboard'] = dashboard
-        return context 
-    
+        return context
+
 class DailyReportView(View):
     def get(self, request, *args, **kwargs):
         today = kenya_time
@@ -329,7 +330,7 @@ class DailyReportView(View):
         # Create an HTTP response with the PDF content
         response = HttpResponse(pdf_file, content_type='application/pdf')
         response['Content-Disposition'] = f'attachment; filename="{today}-report.pdf"'
-        
+
         # Update and reset models after report generation
         with transaction.atomic():  # Ensure all updates happen in a single transaction
             # Update `Drinks` model
@@ -347,10 +348,10 @@ class DailyReportView(View):
 
             # Reset debtors
             SoldDrinks.objects.filter(status='Debt').delete()
-            
+
             #reset Expenses
             Expenses.objects.filter(date__date=today).delete()
-            
+
             #reset Order
             OrderedDrinks.objects.filter(start_date__date=today).delete()
 
