@@ -5,7 +5,7 @@ from datetime import datetime
 import random, string
 from colorama import Fore, Style, Back
 import pytz
-from .email import send_email
+# from .email import send_email
 from django.contrib import messages
 
 # timezone kenya
@@ -43,7 +43,7 @@ class Drinks(models.Model):
         # After saving, check if the closing stock is low and if an order is necessary
         if self.closing_stock < 6:
             print(f"{Back.RED} {self.name} is running low. Stock left: {self.closing_stock} {Style.RESET_ALL}")
-            
+
             from .models import OrderedDrinks
 
             # Check if an order already exists for this drink and is still pending
@@ -63,18 +63,18 @@ class Drinks(models.Model):
                 superuser_emails = [user.email for user in superusers]
                 if superuser_emails:
                     for su_email in superuser_emails:
-                        send_email(
-                            drink=self.name,
-                            date=kenya_time,
-                            email=f'{su_email}'
-                        )
+                        # send_email(
+                        #     drink=self.name,
+                        #     date=kenya_time,
+                        #     email=f'{su_email}'
+                        # )
                         print(f"{Back.GREEN} Email sent successfully to {su_email} {Back.RESET}")
                 else:
                     print(f'{Back.RED} No email found {Style.RESET_ALL}')
 
     def __str__(self):
         return f"{self.name}"
-    
+
     class Meta:
         ordering = ['name']
 
@@ -116,10 +116,10 @@ class SoldDrinks(models.Model):
 
     def __str__(self):
         return f"{self.drink.name}"
-    
+
     class Mete:
         ordering = ['name']
-        
+
 class AddedDrinks(models.Model):
     drink = models.ForeignKey(Drinks, on_delete=models.CASCADE)
 
@@ -129,7 +129,7 @@ class Expenses(models.Model):
     expense = models.CharField(max_length=100, default='', null=False, blank=False)
     price = models.IntegerField(default=100, null=False, blank=False)
     date = models.DateTimeField(auto_now_add=True, null=True)
-    
+
     def save(self, *args, **kwargs):
         # timezone kenya
         kenya_timezone = pytz.timezone('Africa/Nairobi')
@@ -145,12 +145,12 @@ class OrderedDrinks(models.Model):
         ('rejected', 'Rejected'),
         ('pending', 'Pending'),
     ]
-    
+
     PAYMENT_MODE = [
         ('M-pesa', 'M-pesa'),
         ('Cash', 'Cash'),
     ]
-    
+
     drink = models.ForeignKey('Drinks', on_delete=models.CASCADE, related_name='ordered_drinks')
     order_number = models.CharField(max_length=20, unique=True, blank=True)
     product_cost = models.DecimalField(max_digits=10, decimal_places=2)
@@ -162,15 +162,15 @@ class OrderedDrinks(models.Model):
         # Generate a unique order number if it hasn't been set yet
         if not self.order_number:
             self.order_number = self.generate_order_number()
-        
+
         # timezone kenya
         kenya_timezone = pytz.timezone('Africa/Nairobi')
         utc_now = datetime.now(pytz.utc)# Getting the current time in UTC
         kenya_time = utc_now.astimezone(kenya_timezone)
         self.start_date = kenya_time
-        
+
         super().save(*args, **kwargs)
-        
+
 
     def generate_order_number(self):
         # Generate a random string of 6 characters (letters and digits)
@@ -184,20 +184,19 @@ class OrderedDrinks(models.Model):
         # Custom validation logic can be added here
         if self.product_cost < 0:
             raise ValidationError("Product cost cannot be negative.")
-        
+
 class Contact(models.Model):
     name = models.CharField(max_length=50, default="")
     contact = models.CharField(max_length=20, default='+254')
     role = models.CharField(max_length=50, default='Supplier')
     location = models.CharField(max_length=50, default='Nairobi')
     picture = models.ImageField(upload_to='Contact', null=True, default='Contact/default.png')
-    
+
     def __str__(self):
         return f"{self.name} -> {self.role}"
-    
+
 
 class MessageUser(models.Model):
     name = models.ForeignKey(Contact, on_delete=models.CASCADE, null=True)
     message = models.TextField(null=True)
-    
-    
+
